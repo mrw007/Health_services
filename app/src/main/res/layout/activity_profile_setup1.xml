@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/not_so_white"
     android:orientation="vertical"
     tools:context="com.wcompany.mrwah.health_services.profile_setup1">
 
@@ -11,13 +12,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/not_so_white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -33,4 +35,84 @@
             android:layout_height="wrap_content"
             android:text="Salut! Quel est votre nom?" />
     </LinearLayout>
+
+    <ImageButton
+        android:layout_gravity="center"
+        android:id="@+id/imageButton"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/transparent"
+        android:scaleType="centerInside"
+        app:srcCompat="@mipmap/photo_upload" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rounded_textview_borderscolored"
+        android:ems="10"
+        android:hint="Nom"
+        android:inputType="text"
+        android:padding="13dp"
+        android:paddingStart="20dp" />
+
+    <EditText
+        android:id="@+id/firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_textview_borderscolored"
+        android:ems="10"
+        android:hint="Prénom"
+        android:inputType="text"
+        android:padding="13dp"
+        android:paddingStart="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Switch
+            android:id="@+id/ifMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:text="Je suis un médecin"
+            android:textColor="#707070"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:alpha="0.8"
+        android:background="@drawable/rounded_button_colored"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:paddingTop="5dp"
+        android:text="Continuer"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
 </LinearLayout>

@@ -9,5 +9,8 @@ public class profile_setup2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setup2);
+        String nom = getIntent().getStringExtra("nom");
+        String prenom=getIntent().getStringExtra("prenom");
+
     }
 }
