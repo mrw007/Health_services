@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,6 +24,9 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import Entities.Medecin;
 
@@ -77,7 +81,7 @@ public class profile_setup2_2 extends AppCompatActivity {
             register_req(json.toJson(med));
         }
     };
-    private void register_req(String cnx) {
+    private void register_req(final String cnx) {
 
         JsonArrayRequest arrReq = new JsonArrayRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONArray>() {
@@ -91,7 +95,19 @@ public class profile_setup2_2 extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        });
+        }){
+            @Override
+            public byte[] getBody() {
+                return cnx.getBytes();
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("Content-Type","application/json");
+                return params;
+            }
+        };
         requestQueue.add(arrReq);
     }
 }
