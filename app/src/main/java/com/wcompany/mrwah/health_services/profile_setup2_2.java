@@ -32,27 +32,31 @@ public class profile_setup2_2 extends AppCompatActivity {
     RequestQueue requestQueue;
     String baseUrl;
     Gson json = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setup2_2);
-        Spinner specialite = (Spinner) findViewById(R.id.specialite);
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        specialite.setAdapter(adapter);
+
         requestQueue = Volley.newRequestQueue(this);
         baseUrl = getString(R.string.server_link);
+        init();
+    }
+
+    private void init() {
+        //Spinner
+        Spinner specialite = (Spinner) findViewById(R.id.specialite);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.planets_array,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        specialite.setAdapter(adapter);
+
         date_naiss = findViewById(R.id.date_naiss);
         tel = findViewById(R.id.phone);
         email = findViewById(R.id.email);
         adresse = findViewById(R.id.adress);
         finish_btn = findViewById(R.id.finsh_btn);
         finish_btn.setOnClickListener(finish_action);
-
     }
 
     OnClickListener finish_action = new OnClickListener() {
@@ -63,24 +67,23 @@ public class profile_setup2_2 extends AppCompatActivity {
             String prenom = getIntent().getStringExtra("prenom");
             String username = getIntent().getStringExtra("username");
             String pass = getIntent().getStringExtra("pass");
-            Medecin med = new Medecin((long) 0, username, pass,  nom,  prenom, email.getText().toString(),tel.getText().toString(), "testing", tel.getText().toString() , adresse.getText().toString());
-            Context context = getApplicationContext();
+
+            Medecin med = new Medecin(username, pass,  nom,  prenom, email.getText().toString(),tel.getText().toString(), "testing", tel.getText().toString() , adresse.getText().toString());
+
             CharSequence text = json.toJson(med);
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
+            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
             toast.show();
+
             register_req(json.toJson(med));
         }
     };
     private void register_req(String cnx) {
 
-        JsonArrayRequest arrReq = new JsonArrayRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx, new Response.Listener<JSONArray>() {
+        JsonArrayRequest arrReq = new JsonArrayRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
+                new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Context context = getApplicationContext();
-                CharSequence text = response.toString();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
+                Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         }, new Response.ErrorListener() {

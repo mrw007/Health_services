@@ -19,6 +19,19 @@ public class Medecin {
     public Medecin() {
     }
 
+    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet) {
+
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.specialite = specialite;
+        this.telCabinet = telCabinet;
+        this.adresseCabinet = adresseCabinet;
+    }
+
     public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet) {
         this.id = id;
         this.login = login;
@@ -110,5 +123,21 @@ public class Medecin {
 
     public void setAdresseCabinet(String adresseCabinet) {
         this.adresseCabinet = adresseCabinet;
+    }
+
+    @Override
+    public String toString() {
+        return "Medecin{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", mail='" + mail + '\'' +
+                ", tel='" + tel + '\'' +
+                ", specialite='" + specialite + '\'' +
+                ", telCabinet='" + telCabinet + '\'' +
+                ", adresseCabinet='" + adresseCabinet + '\'' +
+                '}';
     }
 }
