@@ -18,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -89,21 +90,18 @@ public class profile_setup2_2 extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        //el code
+                        VolleyLog.v("ferrrr",response.toString());
+                        Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                        toast.show();
+
+
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        }) {
-            @Override
-            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
-                int mStatusCode = response.statusCode;
-                Toast t = Toast.makeText(getApplicationContext(), mStatusCode, Toast.LENGTH_SHORT);
-                return super.parseNetworkResponse(response);
-            }
-        };
+        });
         requestQueue.add(arrReq);
     }
 }
