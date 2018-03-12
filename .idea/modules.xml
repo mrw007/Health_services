@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Health_services.iml" filepath="$PROJECT_DIR$/.idea/Health_services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Health_services.iml" filepath="$PROJECT_DIR$/Health_services.iml" />
+      <module fileurl="file://D:\Documents\Projets\AndroidStudioProjects\Health_services\.idea\Health_services.iml" filepath="D:\Documents\Projets\AndroidStudioProjects\Health_services\.idea\Health_services.iml" />
       <module fileurl="file://D:\Projects\Health_services\Health_services.iml" filepath="D:\Projects\Health_services\Health_services.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

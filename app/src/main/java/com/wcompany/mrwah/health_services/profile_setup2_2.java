@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,7 +51,7 @@ public class profile_setup2_2 extends AppCompatActivity {
     private void init() {
         //Spinner
         Spinner specialite = (Spinner) findViewById(R.id.specialite);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.planets_array,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         specialite.setAdapter(adapter);
@@ -72,40 +73,35 @@ public class profile_setup2_2 extends AppCompatActivity {
             String username = getIntent().getStringExtra("username");
             String pass = getIntent().getStringExtra("pass");
 
-            Medecin med = new Medecin(username, pass,  nom,  prenom, email.getText().toString(),tel.getText().toString(), "testing", tel.getText().toString() , adresse.getText().toString());
+            Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString());
 
-            CharSequence text = json.toJson(med);
+           /* CharSequence text = json.toJson(med);
             Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
             toast.show();
-
+*/
             register_req(json.toJson(med));
         }
     };
+
     private void register_req(final String cnx) {
 
         JsonArrayRequest arrReq = new JsonArrayRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //el code
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        }){
+        }) {
             @Override
-            public byte[] getBody() {
-                return cnx.getBytes();
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("Content-Type","application/json");
-                return params;
+            protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+                int mStatusCode = response.statusCode;
+                Toast t = Toast.makeText(getApplicationContext(), mStatusCode, Toast.LENGTH_SHORT);
+                return super.parseNetworkResponse(response);
             }
         };
         requestQueue.add(arrReq);
