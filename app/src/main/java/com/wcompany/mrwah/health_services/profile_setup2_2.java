@@ -20,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
@@ -86,20 +87,22 @@ public class profile_setup2_2 extends AppCompatActivity {
 
     private void register_req(final String cnx) {
 
-        JsonArrayRequest arrReq = new JsonArrayRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
-                new Response.Listener<JSONArray>() {
+        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         VolleyLog.v("ferrrr",response.toString());
-                        Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "heki hiyya "+response.toString(), Toast.LENGTH_SHORT);
                         toast.show();
+
 
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
         requestQueue.add(arrReq);
