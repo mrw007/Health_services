@@ -44,7 +44,6 @@ public class profile_setup2_2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_setup2_2);
-
         requestQueue = Volley.newRequestQueue(this);
         baseUrl = getString(R.string.server_link);
         init();
@@ -69,24 +68,17 @@ public class profile_setup2_2 extends AppCompatActivity {
     OnClickListener finish_action = new OnClickListener() {
         @Override
         public void onClick(View view) {
-
             String nom = getIntent().getStringExtra("nom");
             String prenom = getIntent().getStringExtra("prenom");
             String username = getIntent().getStringExtra("username");
             String pass = getIntent().getStringExtra("pass");
-
             Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString());
-
-           /* CharSequence text = json.toJson(med);
-            Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-            toast.show();
-*/
             register_req(json.toJson(med));
         }
     };
 
-    private void register_req(final String cnx) {
-
+    private void register_req(final String cnx)
+    {
         JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -94,17 +86,15 @@ public class profile_setup2_2 extends AppCompatActivity {
                         VolleyLog.v("ferrrr",response.toString());
                         Toast toast = Toast.makeText(getApplicationContext(), "heki hiyya "+response.toString(), Toast.LENGTH_SHORT);
                         toast.show();
-
-
-
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
         requestQueue.add(arrReq);
     }
 }
