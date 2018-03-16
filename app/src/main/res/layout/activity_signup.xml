@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/not_so_white"
     android:orientation="vertical"
     tools:context="com.wcompany.mrwah.health_services.signup">
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="120dp"
@@ -43,6 +45,7 @@
         android:inputType="textPassword"
         android:padding="13dp"
         android:paddingStart="20dp" />
+
     <EditText
         android:id="@+id/verif_pass"
         android:layout_width="match_parent"

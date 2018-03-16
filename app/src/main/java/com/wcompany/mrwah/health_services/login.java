@@ -1,7 +1,9 @@
 package com.wcompany.mrwah.health_services;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -26,12 +30,15 @@ import org.json.JSONObject;
 
 import Entities.Connexion;
 
+import static com.basgeekball.awesomevalidation.ValidationStyle.*;
+
 public class login extends AppCompatActivity {
 
     RequestQueue requestQueue;
     String baseUrl;
     Button login_btn;
     EditText username, password;
+    AwesomeValidation username_R, password_R;
     Gson json = new Gson();
 
     @Override
@@ -44,45 +51,54 @@ public class login extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.pass);
         login_btn.setOnClickListener(login_action);
-
-        //login_req();
+        // Step 1: designate a style
+        username_R = new AwesomeValidation(COLORATION);
+        password_R = new AwesomeValidation(COLORATION);
+        username_R.setColor(R.color.colorAccent);  // optional, default color is RED if not set
+        password_R.setColor(R.color.colorAccent);
+        // Step 2: add validations
+        username_R.addValidation(username, "[a-zA-Z0-9\\s]+", "Nom d'utilisateur est requis");
+        password_R.addValidation(password, "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}", "Mot de passe invalide");
     }
+
 
     OnClickListener login_action = new OnClickListener() {
 
         @Override
         public void onClick(View view) {
-            Connexion cnx = new Connexion(username.getText().toString(), password.getText().toString());
-            //login_req(json.toJson(cnx));
+            if (username_R.validate() && password_R.validate()) {
+                Connexion cnx = new Connexion(username.getText().toString(), password.getText().toString());
+                //login_req(json.toJson(cnx));
 
-            //Testing Variables and json object creation
-            Context context = getApplicationContext();
-            CharSequence text = json.toJson(cnx);
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+                //Testing Variables and json object creation
+                Context context = getApplicationContext();
+                CharSequence text = json.toJson(cnx);
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
 
-            //Temporary Redirect
-            switch (username.getText().toString()) {
-                case "1": {
-                    Intent User = new Intent(context, MainActivity.class);
-                    startActivity(User);
-                    break;
-                }
-                case "2": {
-                    Intent Doctor = new Intent(context, MainActivity.class);
-                    startActivity(Doctor);
-                    break;
+                //Temporary Redirect
+                switch (username.getText().toString()) {
+                    case "1": {
+                        Intent User = new Intent(context, MainActivity.class);
+                        startActivity(User);
+                        break;
+                    }
+                    case "2": {
+                        Intent Doctor = new Intent(context, MainActivity.class);
+                        startActivity(Doctor);
+                        break;
 
-                }
-                case "3": {
-                    Intent Admin = new Intent(context, MainActivity.class);
-                    startActivity(Admin);
-                    break;
-                }
-                default: {
-                    Toast toasty = Toast.makeText(context, "Login ou Mot de passe incorrectes", duration);
-                    toasty.show();
+                    }
+                    case "3": {
+                        Intent Admin = new Intent(context, MainActivity.class);
+                        startActivity(Admin);
+                        break;
+                    }
+                    default: {
+                        Toast toasty = Toast.makeText(context, "Login ou Mot de passe incorrectes", duration);
+                        toasty.show();
+                    }
                 }
             }
         }

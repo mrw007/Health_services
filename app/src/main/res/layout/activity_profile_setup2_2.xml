@@ -47,6 +47,8 @@
         android:background="@drawable/rounded_textview_borderscolored"
         android:ems="10"
         android:hint="Date de naissance"
+        android:clickable="true"
+        android:focusable="false"
         android:inputType="date"
         android:padding="13dp"
         android:paddingStart="20dp" />

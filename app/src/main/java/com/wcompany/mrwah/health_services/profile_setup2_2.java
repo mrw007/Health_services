@@ -1,13 +1,19 @@
 package com.wcompany.mrwah.health_services;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,23 +28,34 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import Entities.Medecin;
 
+import static android.app.ProgressDialog.show;
+import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
+
 public class profile_setup2_2 extends AppCompatActivity {
     EditText date_naiss, tel, email, adresse;
+    AwesomeValidation date_naiss_R, tel_R, email_R, adresse_R;
     Button finish_btn;
     RequestQueue requestQueue;
     String baseUrl;
     Gson json = new Gson();
+    Calendar Cal_date_naiss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,29 +80,100 @@ public class profile_setup2_2 extends AppCompatActivity {
         adresse = findViewById(R.id.adress);
         finish_btn = findViewById(R.id.finsh_btn);
         finish_btn.setOnClickListener(finish_action);
+        Cal_date_naiss = Calendar.getInstance();
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                Cal_date_naiss.set(Calendar.YEAR, year);
+                Cal_date_naiss.set(Calendar.MONTH, monthOfYear);
+                Cal_date_naiss.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        date_naiss.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    new DatePickerDialog(profile_setup2_2.this, date, 1994, 01, 01).show();
+                }
+            }
+        });
+        // Step 1: designate a style
+        date_naiss_R = new AwesomeValidation(COLORATION);
+        tel_R = new AwesomeValidation(COLORATION);
+        email_R = new AwesomeValidation(COLORATION);
+        adresse_R = new AwesomeValidation(COLORATION);
+        date_naiss_R.setColor(R.color.colorAccent);  // optional, default color is RED if not set
+        tel_R.setColor(R.color.colorAccent);
+        email_R.setColor(R.color.colorAccent);
+        adresse_R.setColor(R.color.colorAccent);
+        // Step 2: add validations
+        date_naiss_R.addValidation(date_naiss, new SimpleCustomValidation() {
+            @Override
+            public boolean compare(String input) {
+                try {
+                    Calendar calendarBirthday = Calendar.getInstance();
+                    Calendar calendarToday = Calendar.getInstance();
+                    calendarBirthday.setTime(new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH).parse(input));
+                    int yearOfToday = calendarToday.get(Calendar.YEAR);
+                    int yearOfBirthday = calendarBirthday.get(Calendar.YEAR);
+                    if (yearOfToday - yearOfBirthday > 18) {
+                        return true;
+                    } else if (yearOfToday - yearOfBirthday == 18) {
+                        int monthOfToday = calendarToday.get(Calendar.MONTH);
+                        int monthOfBirthday = calendarBirthday.get(Calendar.MONTH);
+                        if (monthOfToday > monthOfBirthday) {
+                            return true;
+                        } else if (monthOfToday == monthOfBirthday) {
+                            if (calendarToday.get(Calendar.DAY_OF_MONTH) >= calendarBirthday.get(Calendar.DAY_OF_MONTH)) {
+                                return true;
+                            }
+                        }
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+        }, "Vérifier Date");
+        tel_R.addValidation(tel, Patterns.PHONE, "Champs requis");
+        email_R.addValidation(email, Patterns.EMAIL_ADDRESS, "Champs requis");
+        adresse_R.addValidation(adresse, adresse, "Les deux champs ne sont pas conformes");
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRENCH);
+        date_naiss.setText(sdf.format(Cal_date_naiss.getTime()));
     }
 
     OnClickListener finish_action = new OnClickListener() {
         @Override
         public void onClick(View view) {
-            String nom = getIntent().getStringExtra("nom");
-            String prenom = getIntent().getStringExtra("prenom");
-            String username = getIntent().getStringExtra("username");
-            String pass = getIntent().getStringExtra("pass");
-            Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString());
-            register_req(json.toJson(med));
+            if (date_naiss_R.validate() && tel_R.validate() && email_R.validate() && adresse_R.validate()) {
+                String nom = getIntent().getStringExtra("nom");
+                String prenom = getIntent().getStringExtra("prenom");
+                String username = getIntent().getStringExtra("username");
+                String pass = getIntent().getStringExtra("pass");
+                Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString());
+                register_req(json.toJson(med), view);
+            }
         }
     };
 
-    private void register_req(final String cnx)
-    {
+    private void register_req(final String cnx, final View view) {
         JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        VolleyLog.v("ferrrr",response.toString());
-                        Toast toast = Toast.makeText(getApplicationContext(), "heki hiyya "+response.toString(), Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "Inscription est terminé avec succès, Bienvenue à bord !", Toast.LENGTH_SHORT);
                         toast.show();
+                        Intent login = new Intent(view.getContext(), login.class);
+                        startActivity(login);
                     }
                 },
                 new Response.ErrorListener() {

@@ -13,6 +13,10 @@ public class Connexion {
         this.password = password;
     }
 
+    public Connexion(String login) {
+        this.login = login;
+    }
+
     public String getLogin() {
         return login;
     }
