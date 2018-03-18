@@ -73,7 +73,6 @@ public class profile_setup2_2 extends AppCompatActivity {
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         specialite.setAdapter(adapter);
-
         date_naiss = findViewById(R.id.date_naiss);
         tel = findViewById(R.id.phone);
         email = findViewById(R.id.email);

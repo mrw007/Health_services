@@ -28,8 +28,11 @@
         <activity android:name=".signup" />
         <activity android:name=".Profile" />
         <activity android:name=".profile_setup1" />
-        <activity android:name=".profile_setup2"/>
-        <activity android:name=".profile_setup2_2"/>
+        <activity android:name=".profile_setup2" />
+        <activity android:name=".profile_setup2_2" />
+        <activity android:name=".adminHome" />
+        <activity android:name=".medecinHome" />
+        <activity android:name=".abonneHome"></activity>
     </application>
 
 </manifest>

@@ -47,6 +47,8 @@
         android:ems="10"
         android:hint="Date de naissance"
         android:inputType="date"
+        android:clickable="true"
+        android:focusable="false"
         android:padding="13dp"
         android:paddingStart="20dp" />
 
@@ -60,7 +62,7 @@
         android:background="@drawable/rounded_textview_borderscolored"
         android:ems="10"
         android:hint="E-mail"
-        android:inputType="phone"
+        android:inputType="textEmailAddress"
         android:padding="13dp"
         android:paddingStart="20dp" />
     <EditText
@@ -93,7 +95,7 @@
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/finsh_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

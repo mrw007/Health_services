@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/not_so_white"
     android:orientation="vertical"
     tools:context="com.wcompany.mrwah.health_services.login">
 
@@ -26,7 +27,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_textview_borderscolored"
         android:ems="10"
-        android:hint="Username"
+        android:hint="Nom d'utilisateur"
         android:inputType="textEmailAddress"
         android:padding="13dp"
         android:paddingStart="20dp" />

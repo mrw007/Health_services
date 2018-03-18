@@ -59,7 +59,7 @@ public class signup extends AppCompatActivity {
         password_R.setColor(R.color.colorAccent);
         verif_pass_R.setColor(R.color.colorAccent);
         // Step 2: add validations
-        username_R.addValidation(username, "[a-zA-Z0-9_-]+", "Nom d'utilisateur est requis est ne doit pas contenir des espaces");
+        username_R.addValidation(username, "[a-zA-Z0-9_-]+", "Nom d'utilisateur est requis et ne doit pas contenir des espaces");
         password_R.addValidation(pass, "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}", "Mot de passe doit être au moins 8 caractères et contient au moins une lettre minuscule, une lettre majiscule et un caractère spécial");
         verif_pass_R.addValidation(verif_pass, pass, "Les deux champs ne sont pas conformes");
     }

@@ -16,7 +16,15 @@ public class Abonne {
 
     public Abonne() {
     }
-
+    public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse) {
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.adresse = adresse;
+    }
     public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse) {
         this.id = id;
         this.login = login;

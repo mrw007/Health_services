@@ -27,7 +27,7 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/rounded_textview_borderscolored"
         android:ems="10"
-        android:hint="Login"
+        android:hint="Nom d'utilisateur"
         android:inputType="textEmailAddress"
         android:padding="13dp"
         android:paddingStart="20dp" />
