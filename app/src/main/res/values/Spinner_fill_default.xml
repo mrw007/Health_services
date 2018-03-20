@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>La cardiologie</item>
+        <item>La dermatologie</item>
+        <item>La gastro-entérologie</item>
+        <item>La gériatrie</item>
+        <item>La gynécologie</item>
+        <item>L'infectiologie</item>
+        <item>La médecine générale</item>
+        <item>La néphrologie</item>
+        <item>La neurologie</item>
+        <item>L'odontologie</item>
+        <item>L'oncologie</item>
+        <item>L'obstétrique</item>
+        <item>L'ophtalmologie</item>
+        <item>L'orthopédie</item>
+        <item>La pédiatrie</item>
+        <item>La pneumologie</item>
+        <item>La psychiatrie</item>
+        <item>La radiologie</item>
+        <item>La radiothérapie</item>
+        <item>La rhumatologie</item>
+        <item>L'urologie</item>
     </string-array>
 </resources>

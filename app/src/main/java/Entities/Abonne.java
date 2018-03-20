@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.Date;
+
 /**
  * Created by mrwah on 3/8/2018.
  */
@@ -13,10 +15,13 @@ public class Abonne {
     private String mail;
     private String tel;
     private String adresse;
+    private String dateNaissance;
 
     public Abonne() {
     }
-    public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse) {
+
+
+    public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse, String dateNaissance) {
         this.login = login;
         this.password = password;
         this.nom = nom;
@@ -24,8 +29,11 @@ public class Abonne {
         this.mail = mail;
         this.tel = tel;
         this.adresse = adresse;
+        this.dateNaissance = dateNaissance;
+
     }
-    public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse) {
+
+    public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse, String dateNaissance) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -34,6 +42,7 @@ public class Abonne {
         this.mail = mail;
         this.tel = tel;
         this.adresse = adresse;
+        this.dateNaissance = dateNaissance;
     }
 
     public Long getId() {
@@ -98,5 +107,13 @@ public class Abonne {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public String getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 }

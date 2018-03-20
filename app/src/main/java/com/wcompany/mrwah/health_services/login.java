@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import Entities.Connexion;
+import Entities.Session;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.*;
 
@@ -86,15 +87,24 @@ public class login extends AppCompatActivity {
                         String type = response.getString(0);
                         switch (type) {
                             case "admin": {
+                                Session session;
+                                session = new Session(getApplicationContext());
+                                session.setAccount(response.getJSONObject(1).toString(), type);
                                 Intent admin = new Intent(view.getContext(), adminHome.class);
                                 startActivity(admin);
                                 break;
                             }
                             case "abonne": {
+                                Session session;
+                                session = new Session(getApplicationContext());
+                                session.setAccount(response.getJSONObject(1).toString(), type);
                                 Intent abonne = new Intent(view.getContext(), abonneHome.class);
                                 startActivity(abonne);
                             }
                             case "medecin": {
+                                Session session;
+                                session = new Session(getApplicationContext());
+                                session.setAccount(response.getJSONObject(1).toString(), type);
                                 Intent medecin = new Intent(view.getContext(), medecinHome.class);
                                 startActivity(medecin);
                             }

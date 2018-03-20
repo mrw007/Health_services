@@ -39,6 +39,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -158,7 +159,7 @@ public class profile_setup2_2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
-                Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString());
+                Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString(), date_naiss.getText().toString());
                 register_req(json.toJson(med), view);
             }
         }

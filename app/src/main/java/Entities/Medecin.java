@@ -1,5 +1,7 @@
 package Entities;
 
+import java.util.Date;
+
 /**
  * Created by mrwah on 3/8/2018.
  */
@@ -15,11 +17,12 @@ public class Medecin {
     private String specialite;
     private String telCabinet;
     private String adresseCabinet;
+    private String  dateNaissance;
 
     public Medecin() {
     }
 
-    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet) {
+    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, String dateNaissance) {
 
         this.login = login;
         this.password = password;
@@ -30,9 +33,11 @@ public class Medecin {
         this.specialite = specialite;
         this.telCabinet = telCabinet;
         this.adresseCabinet = adresseCabinet;
+        this.dateNaissance = dateNaissance;
+
     }
 
-    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet) {
+    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, String dateNaissance) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -43,6 +48,7 @@ public class Medecin {
         this.specialite = specialite;
         this.telCabinet = telCabinet;
         this.adresseCabinet = adresseCabinet;
+        this.dateNaissance = dateNaissance;
     }
 
     public Long getId() {
@@ -125,19 +131,12 @@ public class Medecin {
         this.adresseCabinet = adresseCabinet;
     }
 
-    @Override
-    public String toString() {
-        return "Medecin{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", mail='" + mail + '\'' +
-                ", tel='" + tel + '\'' +
-                ", specialite='" + specialite + '\'' +
-                ", telCabinet='" + telCabinet + '\'' +
-                ", adresseCabinet='" + adresseCabinet + '\'' +
-                '}';
+    public String getDateNaissance() {
+        return dateNaissance;
     }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
 }

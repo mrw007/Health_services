@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import Entities.Abonne;
@@ -140,7 +141,7 @@ public class profile_setup2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
-                Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString());
+                Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(),date_naiss.getText().toString());
                 register_req(json.toJson(Abn), view);
             }
         }
