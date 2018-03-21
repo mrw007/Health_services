@@ -15,13 +15,13 @@ public class Abonne {
     private String mail;
     private String tel;
     private String adresse;
-    private String dateNaissance;
+    private Date dateNaissance;
 
     public Abonne() {
     }
 
 
-    public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse, String dateNaissance) {
+    public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse, Date dateNaissance) {
         this.login = login;
         this.password = password;
         this.nom = nom;
@@ -33,7 +33,7 @@ public class Abonne {
 
     }
 
-    public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse, String dateNaissance) {
+    public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse, Date dateNaissance) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -109,11 +109,11 @@ public class Abonne {
         this.adresse = adresse;
     }
 
-    public String getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(String dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 }

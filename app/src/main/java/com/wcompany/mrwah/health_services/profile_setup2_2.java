@@ -36,6 +36,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -159,8 +160,20 @@ public class profile_setup2_2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
-                Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString(), date_naiss.getText().toString());
-                register_req(json.toJson(med), view);
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+                Date date = null;
+                java.sql.Date sqlDate = null;
+                try {
+                    date = dateFormat.parse(date_naiss.getText().toString());
+                    Log.e("dd1",date.toString());
+                    sqlDate = new java.sql.Date(date.getDate());
+                    Log.e("ggt",sqlDate.toString());
+                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    register_req(json.toJson(med), view);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     };

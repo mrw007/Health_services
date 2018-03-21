@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -141,7 +142,16 @@ public class profile_setup2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
-                Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(),date_naiss.getText().toString());
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.FRENCH);
+                Date date= null;
+                java.sql.Date sqlDate=null;
+                try {
+                    date = dateFormat.parse(date_naiss.getText().toString());
+                    sqlDate = new java.sql.Date(date.getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(),sqlDate);
                 register_req(json.toJson(Abn), view);
             }
         }

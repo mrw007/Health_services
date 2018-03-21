@@ -17,12 +17,12 @@ public class Medecin {
     private String specialite;
     private String telCabinet;
     private String adresseCabinet;
-    private String  dateNaissance;
+    private Date  dateNaissance;
 
     public Medecin() {
     }
 
-    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, String dateNaissance) {
+    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, Date dateNaissance) {
 
         this.login = login;
         this.password = password;
@@ -37,7 +37,7 @@ public class Medecin {
 
     }
 
-    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, String dateNaissance) {
+    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, Date dateNaissance) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -131,12 +131,11 @@ public class Medecin {
         this.adresseCabinet = adresseCabinet;
     }
 
-    public String getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(String dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
-
 }
