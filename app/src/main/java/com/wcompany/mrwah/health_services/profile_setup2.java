@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONObject;
 
@@ -44,7 +45,7 @@ public class profile_setup2 extends AppCompatActivity {
     Button finish_btn;
     RequestQueue requestQueue;
     String baseUrl;
-    Gson json = new Gson();
+    Gson gson;
     Calendar Cal_date_naiss;
 
     @Override
@@ -142,17 +143,19 @@ public class profile_setup2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.FRENCH);
-                Date date= null;
-                java.sql.Date sqlDate=null;
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+                Date date = null;
+                java.sql.Date sqlDate = null;
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
-                    sqlDate = new java.sql.Date(date.getDate());
+                    sqlDate = new java.sql.Date(date.getTime());
+                    Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    register_req(gson.toJson(Abn), view);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(),sqlDate);
-                register_req(json.toJson(Abn), view);
+
             }
         }
     };

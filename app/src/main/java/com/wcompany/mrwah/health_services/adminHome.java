@@ -13,6 +13,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.wcompany.mrwah.health_services.adapters.accountListAdapter;
 
@@ -31,7 +32,7 @@ public class adminHome extends AppCompatActivity {
     private JsonArrayRequest get_medecins_request;
     private List<Medecin> medecinList;
     private RecyclerView accountList;
-    Gson json = new Gson();
+    Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

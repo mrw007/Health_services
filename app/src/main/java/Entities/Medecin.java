@@ -1,6 +1,6 @@
 package Entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by mrwah on 3/8/2018.
@@ -137,5 +137,22 @@ public class Medecin {
 
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
+    }
+
+    @Override
+    public String toString() {
+        return "Medecin{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", mail='" + mail + '\'' +
+                ", tel='" + tel + '\'' +
+                ", specialite='" + specialite + '\'' +
+                ", telCabinet='" + telCabinet + '\'' +
+                ", adresseCabinet='" + adresseCabinet + '\'' +
+                ", dateNaissance=" + dateNaissance +
+                '}';
     }
 }

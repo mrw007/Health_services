@@ -1,6 +1,6 @@
 package Entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by mrwah on 3/8/2018.

@@ -31,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +57,7 @@ public class profile_setup2_2 extends AppCompatActivity {
     Button finish_btn;
     RequestQueue requestQueue;
     String baseUrl;
-    Gson json = new Gson();
+    Gson gson;
     Calendar Cal_date_naiss;
 
     @Override
@@ -165,11 +166,10 @@ public class profile_setup2_2 extends AppCompatActivity {
                 java.sql.Date sqlDate = null;
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
-                    Log.e("dd1",date.toString());
-                    sqlDate = new java.sql.Date(date.getDate());
-                    Log.e("ggt",sqlDate.toString());
+                    sqlDate =  new java.sql.Date(date.getTime());
                     Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString(), sqlDate);
-                    register_req(json.toJson(med), view);
+                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    register_req(gson.toJson(med), view);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
