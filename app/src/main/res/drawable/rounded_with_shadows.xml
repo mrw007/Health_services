@@ -50,7 +50,7 @@
     <!-- content background -->
     <item>
         <shape>
-            <solid android:color="@color/colorWhite" />
+            <solid android:color="@color/not_so_white" />
             <corners android:radius="15dp"/>
         </shape>
     </item>
