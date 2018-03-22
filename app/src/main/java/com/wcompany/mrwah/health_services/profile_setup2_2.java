@@ -58,6 +58,7 @@ public class profile_setup2_2 extends AppCompatActivity {
     RequestQueue requestQueue;
     String baseUrl;
     Gson gson;
+    Spinner specialite;
     Calendar Cal_date_naiss;
 
     @Override
@@ -71,7 +72,7 @@ public class profile_setup2_2 extends AppCompatActivity {
 
     private void init() {
         //Spinner
-        Spinner specialite = (Spinner) findViewById(R.id.specialite);
+        specialite = findViewById(R.id.specialite);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array,
                 android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -161,14 +162,15 @@ public class profile_setup2_2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
+                String spec = specialite.getSelectedItem().toString();
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                 Date date = null;
                 java.sql.Date sqlDate = null;
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
-                    sqlDate =  new java.sql.Date(date.getTime());
-                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), "testing", tel.getText().toString(), adresse.getText().toString(), sqlDate);
-                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    sqlDate = new java.sql.Date(date.getTime());
+                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), spec, tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     register_req(gson.toJson(med), view);
                 } catch (ParseException e) {
                     e.printStackTrace();

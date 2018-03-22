@@ -41,7 +41,7 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         View view;
         LayoutInflater inflater = LayoutInflater.from(mContext);
         view = inflater.inflate(R.layout.profile_list, parent, false);
-        return new ViewHolder(view,mContext,medecinList,parent);
+        return new ViewHolder(view, mContext, medecinList, parent);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         return medecinList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 
     {
         private final List<Medecin> medecins;
@@ -64,16 +64,16 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         private final ViewGroup parent;
         TextView user_name;
         TextView user_spec;
-        TextView dissmiss,profile_name,profile_spec,date_ness,phone,adress;
+        TextView dissmiss, profile_name, profile_spec, date_ness, phone, adress;
 
-        public ViewHolder(View itemView, Context mContext, List<Medecin> medecins,ViewGroup parent) {
+        public ViewHolder(View itemView, Context mContext, List<Medecin> medecins, ViewGroup parent) {
             super(itemView);
             itemView.setOnClickListener(this);
             user_name = itemView.findViewById(R.id.profile_name);
             user_spec = itemView.findViewById(R.id.profile_spec);
-            this.medecins=medecins;
-            this.mcontext=mContext;
-            this.parent=parent;
+            this.medecins = medecins;
+            this.mcontext = mContext;
+            this.parent = parent;
         }
 
         @Override
@@ -82,8 +82,9 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             Medecin med = medecins.get(position);
             showPopup(view, med);
         }
-        public void showPopup(View view,Medecin med) {
-            View popupView = LayoutInflater.from(mcontext).inflate(R.layout.medecin_list_popup,null);
+
+        public void showPopup(View view, Medecin med) {
+            View popupView = LayoutInflater.from(mcontext).inflate(R.layout.medecin_list_popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
             dissmiss = popupWindow.getContentView().findViewById(R.id.dissmiss);
             profile_name = popupWindow.getContentView().findViewById(R.id.profile_name);
@@ -95,16 +96,15 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             String name = med.getPrenom() + " " + med.getNom();
             profile_name.setText(name);
             profile_spec.setText(med.getSpecialite());
-            //date_ness.setText(med.getDateNaissance().toString());
+            date_ness.setText(med.getDateNaissance().toString());
             phone.setText(med.getTelCabinet());
             adress.setText(med.getAdresseCabinet());
-            Log.e("med",med.toString());
             dissmiss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                }
+            });
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
         }

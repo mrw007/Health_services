@@ -45,10 +45,10 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/rounded_textview_borderscolored"
-        android:ems="10"
-        android:hint="Date de naissance"
         android:clickable="true"
+        android:ems="10"
         android:focusable="false"
+        android:hint="Date de naissance"
         android:inputType="date"
         android:padding="13dp"
         android:paddingStart="20dp" />
@@ -73,10 +73,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
 
-        android:padding="13dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@drawable/rounded_textview_borderscolored" />
+        android:background="@drawable/rounded_textview_borderscolored"
+        android:padding="13dp" />
 
     <EditText
         android:id="@+id/phone"

@@ -60,9 +60,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="40dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -75,8 +75,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -104,8 +104,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -118,8 +118,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -148,8 +148,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
             android:layout_marginLeft="40dp"
+            android:layout_marginRight="30dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -162,8 +162,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -196,12 +196,12 @@
             android:orientation="horizontal">
 
 
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="left"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/accepter_btn"
                     android:layout_width="120dp"
@@ -218,16 +218,18 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="12sp" />
             </LinearLayout>
-                <android.support.v4.widget.Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_gravity="right"
                 android:layout_height="match_parent"
+                android:layout_gravity="right"
                 android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/login_btn2"
                     android:layout_width="120dp"

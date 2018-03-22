@@ -66,7 +66,7 @@ public class adminHome extends AppCompatActivity {
 
             }
         });
-        requestQueue= Volley.newRequestQueue(adminHome.this);
+        requestQueue = Volley.newRequestQueue(adminHome.this);
         requestQueue.add(get_medecins_request);
     }
 
