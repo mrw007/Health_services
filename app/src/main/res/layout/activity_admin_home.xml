@@ -10,7 +10,7 @@
 
 
 
-        <android.support.v7.widget.Toolbar
+    <!--    <android.support.v7.widget.Toolbar
             android:id="@+id/adminToolBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,7 +18,14 @@
             android:elevation="4dp"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
+-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/adminToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 
     <android.support.v7.widget.RecyclerView

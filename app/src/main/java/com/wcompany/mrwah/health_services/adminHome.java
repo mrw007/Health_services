@@ -1,16 +1,18 @@
 package com.wcompany.mrwah.health_services;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
+
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,13 +33,14 @@ import java.util.List;
 import Entities.Medecin;
 import Entities.Session;
 
+
 public class adminHome extends AppCompatActivity {
     RequestQueue requestQueue;
     String baseUrl;
     private JsonArrayRequest get_medecins_request;
     private List<Medecin> medecinList;
     private RecyclerView accountList;
-    Toolbar adminToolBar;
+    Toolbar admin_ToolBar;
     Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     Session session;
 
@@ -45,11 +48,12 @@ public class adminHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        adminToolBar = findViewById(R.id.adminToolBar);
-        setSupportActionBar(adminToolBar);
-
         setContentView(R.layout.activity_admin_home);
+
+        admin_ToolBar = findViewById(R.id.adminToolBar);
+        setSupportActionBar(admin_ToolBar);
+        admin_ToolBar.setTitle("Liste demandes médecins");
+
         baseUrl = getString(R.string.server_link);
         medecinList = new ArrayList<>();
         accountList = findViewById(R.id.account_list);
@@ -99,7 +103,27 @@ public class adminHome extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.admin_menu, menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.Signout:
+                // User chose the "Settings" item, show the app settings UI...
+                session.deleteAccount();
+                Intent login = new Intent(getBaseContext(), login.class);
+                login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(login);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
 }

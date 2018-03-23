@@ -9,7 +9,7 @@
         android:title="Se déconnecter"
         android:actionLayout="@layout/activity_admin_home"
         android:visible="true"
-        app:showAsAction="never"
+        app:showAsAction="ifRoom"
          />
 
 
