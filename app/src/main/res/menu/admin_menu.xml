@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <!-- "Mark Favorite", should appear as action button if possible -->
+    <item
+        android:id="@+id/Signout"
+        android:icon="@drawable/logout_ic"
+        android:iconTint="@color/not_so_white"
+        android:title="Se déconnecter"
+        android:actionLayout="@layout/activity_admin_home"
+        android:visible="true"
+        app:showAsAction="never"
+         />
+
+
+</menu>

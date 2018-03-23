@@ -25,6 +25,10 @@ public class Session {
         String account = prefs.getString("account", "");
         return account;
     }
+    public String getType() {
+        String type = prefs.getString("type", "");
+        return type;
+    }
 
     public void deleteAccount() {
         prefs.edit().clear().apply();

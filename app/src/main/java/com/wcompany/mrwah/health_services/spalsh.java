@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import Entities.Session;
+
 public class spalsh extends AppCompatActivity {
 private ImageView logo;
+Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,9 @@ private ImageView logo;
         Animation splash_animation= AnimationUtils.loadAnimation(this,R.anim.spalsh_transition);
         logo.startAnimation(splash_animation);
         final Intent walk_through =new Intent(this,walk_through.class);
+        final Intent admin = new Intent(this, adminHome.class);
+        final Intent abonne = new Intent(this, abonneHome.class);
+        final Intent medecin = new Intent(this, medecinHome.class);
         Thread timer = new Thread(){
             public void run(){
                 try {
@@ -29,7 +35,24 @@ private ImageView logo;
                     e.printStackTrace();
                 }
                 finally {
-                    startActivity(walk_through);
+                    session = new Session(getApplicationContext());
+                    switch (session.getType()){
+                        case "admin": {
+
+                            startActivity(admin);
+                            break;
+                        }
+                        case "abonne": {
+
+                            startActivity(abonne);
+                            break;
+                        }
+                        case "medecin": {
+                            startActivity(medecin);
+                            break;
+                        }
+                        default:  startActivity(walk_through);
+                    }
                     finish();
                 }
             }

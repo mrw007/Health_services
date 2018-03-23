@@ -33,6 +33,7 @@ public class profile_setup1 extends AppCompatActivity {
         prenom = findViewById(R.id.firstname);
         next_btn.setOnClickListener(next_action);
 
+
         // Step 1: designate a style
         nom_R = new AwesomeValidation(COLORATION);
         prenom_R = new AwesomeValidation(COLORATION);
