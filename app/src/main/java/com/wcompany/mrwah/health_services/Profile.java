@@ -1,12 +1,15 @@
 package com.wcompany.mrwah.health_services;
 
-import android.app.ProgressDialog;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,36 +17,33 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.UploadNotificationConfig;
 
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.IOException;
+import java.util.UUID;
 
 
 public class Profile extends AppCompatActivity {
-    private ImageView imageview;
+    private static final int STORAGE_PERMISSION_CODE = 1242;
     private static final int SELECT_PICTURE = 1;
+    private Uri filePath;
+    private Bitmap bitmap;
+
+    private ImageView imageview;
 
     RequestQueue requestQueue;
     String baseUrl;
     Gson json = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestStoragePermission();
         setContentView(R.layout.activity_profile);
         requestQueue = Volley.newRequestQueue(this);
         baseUrl = getString(R.string.server_link);
@@ -51,114 +51,79 @@ public class Profile extends AppCompatActivity {
         imageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,
-                        "Select Picture"), SELECT_PICTURE);
-
+                showFileChooser();
             }
         });
     }
 
-    ;
+    private void requestStoragePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+    }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_PICTURE) {
-                imageview.setImageBitmap(null);
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == STORAGE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+            } else Toast.makeText(this, "Permission not granted", Toast.LENGTH_SHORT).show();
 
-                Uri mediaUri = data.getData();
-                String mediaPath = getPath(mediaUri);
-                Log.e("amalPath", mediaPath);
+        }
+    }
 
-                File photo = new File(mediaPath);
-                RequestParams params = new RequestParams();
-                try {
-                    params.put("file", photo);
-                } catch(FileNotFoundException e) {}
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+    }
 
-                AsyncHttpClient client = new AsyncHttpClient();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                imageview.setImageBitmap(bitmap);
+            } catch (IOException e) {
 
-                client.post(baseUrl + "/fileupload", params, new JsonHttpResponseHandler() {
-                    ProgressDialog pd;
-                    @Override
-                    public void onStart() {
-                        String uploadingMessage = "uploading";
-                        pd = new ProgressDialog(Profile.this);
-                        pd.setTitle("please_wait");
-                        pd.setMessage(uploadingMessage);
-                        pd.setIndeterminate(false);
-                        pd.show();
-                    }
-
-
-
-                    @Override
-                    public void onFinish() {
-                        pd.dismiss();
-                    }
-                });
-
-
-                //display the image
-                try {
-                    InputStream inputStream = getBaseContext().getContentResolver().openInputStream(mediaUri);
-                    Bitmap bm = BitmapFactory.decodeStream(inputStream);
-
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    byte[] byteArray = stream.toByteArray();
-
-                    //register_req(json.toJson(byteArray));
-                    imageview.setImageBitmap(bm);
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
             }
+            uploadImage();
         }
     }
 
-    public String getPath(Uri uri) {
-        // just some safety built in
-        if (uri == null) {
-            // TODO perform some logging or show user feedback
-            return null;
-        }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if (cursor != null) {
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        }
-        // this is our fallback here
-        return uri.getPath();
+    private String getPath(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        String document_id = cursor.getString(0);
+
+        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+        cursor.close();
+
+        cursor = getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null
+        );
+        cursor.moveToFirst();
+        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+        return path;
     }
 
+    private void uploadImage() {
+        String path = getPath(filePath);
+        try {
+            Log.i("path", filePath.toString());
+            String uploadid = UUID.randomUUID().toString();
+            new MultipartUploadRequest(this, uploadid, baseUrl + "/fileupload")
+                    .addFileToUpload(path, "file")
+                    .setNotificationConfig(new UploadNotificationConfig())
+                    .setMaxRetries(2)
+                    .startUpload();
+        } catch (Exception e) {
 
-    private void register_req( final String cnx) {
-        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/upload", cnx,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Toast toast = Toast.makeText(getApplicationContext(), " succès", Toast.LENGTH_SHORT);
-                        toast.show();
-
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-                });
-        requestQueue.add(arrReq);
-
-
+        }
     }
 }

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.wcompany.mrwah.health_services"
@@ -32,5 +33,7 @@ dependencies {
     implementation 'com.basgeekball:awesome-validation:4.1'
     compile "cz.msebera.android:httpclient:4.4.1.2"
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile "net.gotev:uploadservice:3.1"
+
 
 }
