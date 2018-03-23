@@ -203,7 +203,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/accepter_btn"
+                    android:id="@+id/refuser_btn"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -231,7 +231,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/login_btn2"
+                    android:id="@+id/accepter_btn"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

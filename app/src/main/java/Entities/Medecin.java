@@ -19,6 +19,10 @@ public class Medecin {
     private String adresseCabinet;
     private Date  dateNaissance;
 
+    public Medecin(Long id) {
+        this.id = id;
+    }
+
     public Medecin() {
     }
 
