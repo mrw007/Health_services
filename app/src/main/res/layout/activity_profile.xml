@@ -13,7 +13,7 @@
         android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/actionModeSplitBackground"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
@@ -26,6 +26,7 @@
         android:padding="0dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/user"

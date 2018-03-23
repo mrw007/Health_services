@@ -36,7 +36,7 @@ Session session;
                 }
                 finally {
                     session = new Session(getApplicationContext());
-                    switch (session.getType()){
+                  /*  switch (session.getType()){
                         case "admin": {
 
                             startActivity(admin);
@@ -52,8 +52,10 @@ Session session;
                             break;
                         }
                         default:  startActivity(walk_through);
-                    }
-                    finish();
+                    }*/
+                      startActivity(walk_through);
+
+                        finish();
                 }
             }
         };
