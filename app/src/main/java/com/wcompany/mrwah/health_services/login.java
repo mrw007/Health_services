@@ -105,7 +105,7 @@ public class login extends AppCompatActivity {
                                 Session session;
                                 session = new Session(getApplicationContext());
                                 session.setAccount(response.getJSONObject(1).toString(), type);
-                                Intent medecin = new Intent(view.getContext(), Profile.class);
+                                Intent medecin = new Intent(view.getContext(), home_medecin.class);
                                 startActivity(medecin);
                             }
                         }
