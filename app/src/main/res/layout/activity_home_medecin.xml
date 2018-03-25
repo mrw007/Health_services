@@ -5,12 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wcompany.mrwah.health_services.home_medecin">
+    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.home_medecin">
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/navigation"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="47dp"
         android:background="?android:attr/windowBackground"
         android:elevation="4dp"
         android:theme="@style/AppTheme"
@@ -23,7 +23,7 @@
         android:id="@+id/fragmentContainer_med"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginBottom="47dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

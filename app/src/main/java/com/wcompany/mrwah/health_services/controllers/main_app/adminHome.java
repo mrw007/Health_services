@@ -1,4 +1,4 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.main_app;
 
 import android.content.Intent;
 
@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -21,6 +19,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.adapters.accountListAdapter;
 
 import org.json.JSONArray;
@@ -30,8 +29,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entities.Medecin;
-import Entities.Session;
+import com.wcompany.mrwah.health_services.Entities.Medecin;
+import com.wcompany.mrwah.health_services.Entities.Session;
+import com.wcompany.mrwah.health_services.controllers.login.login;
 
 
 public class adminHome extends AppCompatActivity {
@@ -60,7 +60,7 @@ public class adminHome extends AppCompatActivity {
         session = new Session(getApplicationContext());
         jsonRequest();
         if (session.getAccount().equals("")) {
-            Intent login = new Intent(getBaseContext(), login.class);
+            Intent login = new Intent(getBaseContext(), com.wcompany.mrwah.health_services.controllers.login.login.class);
             login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(login);
         }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@mipmap/background"
     android:orientation="vertical"
-    tools:context="com.wcompany.mrwah.health_services.walk_through">
+    tools:context="com.wcompany.mrwah.health_services.controllers.startup.walk_through">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/slideView_layout"

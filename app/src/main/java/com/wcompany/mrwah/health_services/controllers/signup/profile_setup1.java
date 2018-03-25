@@ -1,9 +1,8 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.signup;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -11,8 +10,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
-
-import java.util.regex.Pattern;
+import com.wcompany.mrwah.health_services.R;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 

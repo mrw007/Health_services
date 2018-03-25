@@ -14,32 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-    <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".spalsh">
+        <activity android:name=".controllers.startup.spalsh">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".walk_through" />
-        <activity android:name=".login" />
-        <activity android:name=".signup" />
-        <activity android:name=".Profile" />
-        <activity android:name=".profile_setup1" />
-        <activity android:name=".profile_setup2" />
-        <activity android:name=".profile_setup2_2" />
-        <activity android:name=".adminHome" />
-        <activity android:name=".medecinHome" />
-        <activity android:name=".abonneHome" />
+        <activity android:name=".controllers.startup.walk_through" />
+        <activity android:name=".controllers.login.login" />
+        <activity android:name=".controllers.signup.signup" />
+        <activity android:name=".controllers.main_app.Profile" />
+        <activity android:name=".controllers.signup.profile_setup1" />
+        <activity android:name=".controllers.signup.profile_setup2" />
+        <activity android:name=".controllers.signup.profile_setup2_2" />
+        <activity android:name=".controllers.main_app.adminHome" />
+        <activity android:name=".controllers.main_app.abonneHome" />
         <activity
-            android:name=".home_medecin"
-            android:label="@string/title_activity_home_medecin"></activity>
+            android:name=".controllers.main_app.home_medecin"
+            android:label="@string/title_activity_home_medecin"/>
     </application>
 
 </manifest>

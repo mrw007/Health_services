@@ -1,4 +1,4 @@
-package Entities;
+package com.wcompany.mrwah.health_services.Entities;
 
 /**
  * Created by mrwah on 3/8/2018.

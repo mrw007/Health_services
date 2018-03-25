@@ -1,4 +1,4 @@
-package Entities;
+package com.wcompany.mrwah.health_services.Entities;
 
 import android.content.Context;
 import android.content.SharedPreferences;

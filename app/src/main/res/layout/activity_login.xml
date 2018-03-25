@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/not_so_white"
     android:orientation="vertical"
-    tools:context="com.wcompany.mrwah.health_services.login">
+    tools:context="com.wcompany.mrwah.health_services.controllers.login.login">
 
     <ImageView
         android:id="@+id/logo"

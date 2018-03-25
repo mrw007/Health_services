@@ -1,4 +1,4 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.main_app;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.wcompany.mrwah.health_services.R;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;

@@ -1,4 +1,4 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.main_app;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.fragments.medecin.dashboard_medecin_fragment;
 import com.wcompany.mrwah.health_services.fragments.medecin.home_medecin_fragment;
 import com.wcompany.mrwah.health_services.fragments.medecin.notifs_medecin_fragment;
@@ -27,8 +28,8 @@ public class home_medecin extends AppCompatActivity implements BottomNavigationV
         navigation.enableAnimation(true);
         navigation.enableShiftingMode(false);
         navigation.enableItemShiftingMode(true);
-        navigation.setTextVisibility(false);
-        navigation.setIconSize(25, 25);
+        navigation.setTextVisibility(true);
+        navigation.setIconSize(20, 20);
     }
 
     private boolean loadFragment(Fragment fragment) {

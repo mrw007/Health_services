@@ -1,4 +1,4 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.startup;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.wcompany.mrwah.health_services.R;
+import com.wcompany.mrwah.health_services.adapters.SliderAdapter;
+import com.wcompany.mrwah.health_services.controllers.login.login;
 
 public class walk_through extends AppCompatActivity {
 private ViewPager w_viewPager ;

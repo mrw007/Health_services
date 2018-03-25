@@ -7,7 +7,7 @@
     android:layout_margin="0dp"
     android:orientation="vertical"
     android:padding="0dp"
-    tools:context="com.wcompany.mrwah.health_services.Profile">
+    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.Profile">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/profile_toolbar"

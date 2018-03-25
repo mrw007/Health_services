@@ -1,4 +1,4 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.signup;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -34,30 +35,38 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import Entities.Abonne;
-import Entities.Medecin;
+import com.wcompany.mrwah.health_services.Entities.Medecin;
+import com.wcompany.mrwah.health_services.R;
 
+import static android.app.ProgressDialog.show;
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
-public class profile_setup2 extends AppCompatActivity {
+public class profile_setup2_2 extends AppCompatActivity {
     EditText date_naiss, tel, email, adresse;
     AwesomeValidation date_naiss_R, tel_R, email_R, adresse_R;
     Button finish_btn;
     RequestQueue requestQueue;
     String baseUrl;
     Gson gson;
+    Spinner specialite;
     Calendar Cal_date_naiss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_setup2);
+        setContentView(R.layout.activity_profile_setup2_2);
         requestQueue = Volley.newRequestQueue(this);
         baseUrl = getString(R.string.server_link);
         init();
     }
 
     private void init() {
+        //Spinner
+        specialite = findViewById(R.id.specialite);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.planets_array,
+                android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        specialite.setAdapter(adapter);
         date_naiss = findViewById(R.id.date_naiss);
         tel = findViewById(R.id.phone);
         email = findViewById(R.id.email);
@@ -76,13 +85,13 @@ public class profile_setup2 extends AppCompatActivity {
                 updateLabel();
             }
         };
-        date_naiss.setOnClickListener(new View.OnClickListener() {
+        date_naiss.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    new DatePickerDialog(profile_setup2.this, date, 1994, 01, 01).show();
+                    new DatePickerDialog(profile_setup2_2.this, date, 1994, 01, 01).show();
                 }
             }
         });
@@ -135,7 +144,7 @@ public class profile_setup2 extends AppCompatActivity {
         date_naiss.setText(sdf.format(Cal_date_naiss.getTime()));
     }
 
-    View.OnClickListener finish_action = new View.OnClickListener() {
+    OnClickListener finish_action = new OnClickListener() {
         @Override
         public void onClick(View view) {
             if (date_naiss_R.validate() && tel_R.validate() && email_R.validate() && adresse_R.validate()) {
@@ -143,15 +152,16 @@ public class profile_setup2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
+                String spec = specialite.getSelectedItem().toString();
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                 Date date = null;
                 java.sql.Date sqlDate = null;
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
                     sqlDate = new java.sql.Date(date.getTime());
-                    Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), spec, tel.getText().toString(), adresse.getText().toString(), sqlDate);
                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    register_req(gson.toJson(Abn), view);
+                    register_req(gson.toJson(med), view);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -161,13 +171,13 @@ public class profile_setup2 extends AppCompatActivity {
     };
 
     private void register_req(final String cnx, final View view) {
-        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupAbonne", cnx,
+        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Inscription est terminé avec succès, Bienvenue à bord !", Toast.LENGTH_SHORT);
                         toast.show();
-                        Intent login = new Intent(view.getContext(), login.class);
+                        Intent login = new Intent(view.getContext(), com.wcompany.mrwah.health_services.controllers.login.login.class);
                         startActivity(login);
                     }
                 },

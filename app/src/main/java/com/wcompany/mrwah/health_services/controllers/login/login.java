@@ -1,18 +1,12 @@
-package com.wcompany.mrwah.health_services;
+package com.wcompany.mrwah.health_services.controllers.login;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,15 +16,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.basgeekball.awesomevalidation.ValidationStyle;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import Entities.Connexion;
-import Entities.Session;
+import com.wcompany.mrwah.health_services.Entities.Connexion;
+import com.wcompany.mrwah.health_services.Entities.Session;
+import com.wcompany.mrwah.health_services.R;
+import com.wcompany.mrwah.health_services.controllers.main_app.abonneHome;
+import com.wcompany.mrwah.health_services.controllers.main_app.adminHome;
+import com.wcompany.mrwah.health_services.controllers.main_app.home_medecin;
+import com.wcompany.mrwah.health_services.controllers.signup.signup;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.*;
 
