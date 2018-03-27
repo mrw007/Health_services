@@ -1,8 +1,10 @@
 package com.wcompany.mrwah.health_services.controllers.main_app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -64,9 +67,6 @@ public class adminHome extends AppCompatActivity {
             login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(login);
         }
-        Toast toast = Toast.makeText(getApplicationContext(), session.getAccount(), Toast.LENGTH_LONG);
-        toast.show();
-
     }
 
     private void jsonRequest() {
@@ -125,5 +125,20 @@ public class adminHome extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Etes-vous sûr de vouloir quitter l'application?")
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Non", null);
+        AlertDialog alertDialog =builder.create();
+        alertDialog.show();
+    }
 }

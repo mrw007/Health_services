@@ -39,12 +39,10 @@ public class spalsh extends AppCompatActivity {
                     session = new Session(getApplicationContext());
                     switch (session.getType()) {
                         case "admin": {
-
                             startActivity(admin);
                             break;
                         }
                         case "abonne": {
-
                             startActivity(abonne);
                             break;
                         }

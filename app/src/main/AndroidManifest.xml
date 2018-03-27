@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".controllers.startup.spalsh">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +31,17 @@
         <activity android:name=".controllers.main_app.abonneHome" />
         <activity
             android:name=".controllers.main_app.home_medecin"
-            android:label="@string/title_activity_home_medecin"/>
+            android:label="@string/title_activity_home_medecin" />
+        <activity
+            android:name=".controllers.main_app.medecin_profile_edit"
+            android:label="@string/title_activity_medecin_profile_edit"
+            android:parentActivityName=".controllers.main_app.home_medecin"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wcompany.mrwah.health_services.controllers.main_app.home_medecin" />
+        </activity>
+        <activity android:name=".controllers.main_app.abonne_profile_edit"></activity>
     </application>
 
 </manifest>

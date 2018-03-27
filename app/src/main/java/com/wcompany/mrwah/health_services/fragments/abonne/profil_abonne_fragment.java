@@ -1,6 +1,5 @@
-package com.wcompany.mrwah.health_services.fragments.medecin;
+package com.wcompany.mrwah.health_services.fragments.abonne;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,53 +15,45 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wcompany.mrwah.health_services.Entities.Medecin;
+import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
-import com.wcompany.mrwah.health_services.adapters.medecinProfileDetailsListAdapter;
-import com.wcompany.mrwah.health_services.controllers.login.login;
-import com.wcompany.mrwah.health_services.controllers.main_app.home_medecin;
-
-import org.json.JSONObject;
+import com.wcompany.mrwah.health_services.adapters.abonneProfileDetailsListAdapter;
 
 /**
  * Created by mrwah on 3/25/2018.
  */
 
-public class profil_medecin_fragment extends Fragment {
+public class profil_abonne_fragment extends Fragment {
     RecyclerView recyclerView;
-    medecinProfileDetailsListAdapter adapter;
-    Medecin med;
+    abonneProfileDetailsListAdapter adapter;
+    Abonne abn;
     Session session;
     Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-    Toolbar medecin_profile_toolbar;
+    Toolbar abonne_profile_toolbar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_profil_medecin, null);
+        View rootView = inflater.inflate(R.layout.fragment_profil_abonne, null);
         if (container != null) {
-            medecin_profile_toolbar = rootView.findViewById(R.id.profile_toolbar);
-            ((AppCompatActivity)getActivity()).setSupportActionBar(medecin_profile_toolbar);
-            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+            abonne_profile_toolbar = rootView.findViewById(R.id.profile_toolbar);
+            ((AppCompatActivity) getActivity()).setSupportActionBar(abonne_profile_toolbar);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
             setHasOptionsMenu(true);
-            recyclerView = rootView.findViewById(R.id.medecin_profile_details_list);
+            recyclerView = rootView.findViewById(R.id.abonne_profile_details_list);
             recyclerView.setHasFixedSize(true);
             session = new Session(getActivity().getApplicationContext());
             String acc = session.getAccount();
-            med = json.fromJson(acc, Medecin.class);
-            String name = med.getPrenom() + " " + med.getNom();
+            abn = json.fromJson(acc, Abonne.class);
+            String name = abn.getPrenom() + " " + abn.getNom();
             TextView nom = rootView.findViewById(R.id.profile_name);
             nom.setText(name);
-            TextView spec = rootView.findViewById(R.id.profile_spec);
-            spec.setText(med.getSpecialite());
-            adapter = new medecinProfileDetailsListAdapter(rootView.getContext(), med);
+            adapter = new abonneProfileDetailsListAdapter(rootView.getContext(), abn);
             recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
             recyclerView.setAdapter(adapter);
         }
@@ -72,8 +63,9 @@ public class profil_medecin_fragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        ((AppCompatActivity)getActivity()).getMenuInflater().inflate(R.menu.medcin_profile_menu, menu);
+        ((AppCompatActivity) getActivity()).getMenuInflater().inflate(R.menu.abonne_profile_menu, menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -81,7 +73,7 @@ public class profil_medecin_fragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.edit:
-                Intent edit = new Intent(((AppCompatActivity)getActivity()), com.wcompany.mrwah.health_services.controllers.main_app.medecin_profile_edit.class);
+                Intent edit = new Intent(((AppCompatActivity)getActivity()), com.wcompany.mrwah.health_services.controllers.main_app.abonne_profile_edit.class);
                 edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(edit);
                 return true;

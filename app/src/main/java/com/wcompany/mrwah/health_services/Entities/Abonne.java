@@ -20,6 +20,9 @@ public class Abonne {
     public Abonne() {
     }
 
+    public Abonne(Long id) {
+        this.id = id;
+    }
 
     public Abonne(String login, String password, String nom, String prenom, String mail, String tel, String adresse, Date dateNaissance) {
         this.login = login;
