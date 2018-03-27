@@ -17,7 +17,8 @@ public class Medecin {
     private String specialite;
     private String telCabinet;
     private String adresseCabinet;
-    private Date  dateNaissance;
+    private int validation;
+    private Date dateNaissance;
 
     public Medecin(Long id) {
         this.id = id;
@@ -39,6 +40,22 @@ public class Medecin {
         this.adresseCabinet = adresseCabinet;
         this.dateNaissance = dateNaissance;
 
+    }
+
+    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, int validation, Date dateNaissance) {
+        super();
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.specialite = specialite;
+        this.telCabinet = telCabinet;
+        this.adresseCabinet = adresseCabinet;
+        this.validation = validation;
+        this.dateNaissance = dateNaissance;
     }
 
     public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, Date dateNaissance) {
@@ -158,5 +175,13 @@ public class Medecin {
                 ", adresseCabinet='" + adresseCabinet + '\'' +
                 ", dateNaissance=" + dateNaissance +
                 '}';
+    }
+
+    public int getValidation() {
+        return validation;
+    }
+
+    public void setValidation(int validation) {
+        this.validation = validation;
     }
 }

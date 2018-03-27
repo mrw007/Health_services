@@ -9,12 +9,13 @@
     tools:context="com.wcompany.mrwah.health_services.controllers.main_app.medecin_profile_edit">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/profile_toolbar"
+        android:id="@+id/edit_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/cancelToolbarStyle"
+        app:popupTheme="@style/cancelToolbarStyle"
         app:titleTextColor="@color/colorWhite" />
 
     <ScrollView
@@ -155,6 +156,8 @@
                         android:layout_height="match_parent"
                         android:hint="Date naissance"
                         android:inputType="date"
+                        android:clickable="true"
+                        android:focusable="false"
                         android:textAlignment="viewStart" />
                 </LinearLayout>
             </LinearLayout>

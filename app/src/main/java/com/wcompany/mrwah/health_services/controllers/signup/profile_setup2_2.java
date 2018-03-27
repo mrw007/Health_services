@@ -90,7 +90,7 @@ public class profile_setup2_2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     new DatePickerDialog(profile_setup2_2.this, date, 1994, 01, 01).show();
                 }
             }

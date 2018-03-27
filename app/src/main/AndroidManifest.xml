@@ -41,7 +41,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wcompany.mrwah.health_services.controllers.main_app.home_medecin" />
         </activity>
-        <activity android:name=".controllers.main_app.abonne_profile_edit"></activity>
+        <activity
+            android:name=".controllers.main_app.abonne_profile_edit"
+            android:label="@string/title_activity_medecin_profile_edit"
+            android:parentActivityName=".controllers.main_app.abonneHome"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wcompany.mrwah.health_services.controllers.main_app.abonneHome" />
+        </activity>
     </application>
 
 </manifest>

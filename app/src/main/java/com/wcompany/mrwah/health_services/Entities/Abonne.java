@@ -16,6 +16,8 @@ public class Abonne {
     private String tel;
     private String adresse;
     private Date dateNaissance;
+    private String image_src;
+
 
     public Abonne() {
     }
@@ -46,6 +48,20 @@ public class Abonne {
         this.tel = tel;
         this.adresse = adresse;
         this.dateNaissance = dateNaissance;
+    }
+
+    public Abonne(String login, String password, String nom, String prenom, String mail, String tel,
+                  String adresse, Date dateNaissance, String image_src) {
+        super();
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.dateNaissance = dateNaissance;
+        this.image_src = image_src;
     }
 
     public Long getId() {
@@ -119,4 +135,13 @@ public class Abonne {
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
+
+    public String getImage_src() {
+        return image_src;
+    }
+
+    public void setImage_src(String image_src) {
+        this.image_src = image_src;
+    }
+
 }

@@ -36,15 +36,18 @@
             android:text="Salut! Quel est votre nom?" />
     </LinearLayout>
 
-    <ImageButton
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/image"
         android:layout_gravity="center"
-        android:id="@+id/imageButton"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/cam"
         android:layout_marginTop="30dp"
-        android:backgroundTint="@color/transparent"
-        android:scaleType="centerInside"
-        app:srcCompat="@mipmap/photo_upload" />
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="1dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="@color/colorPrimary"
+        app:civ_shadow_radius="5" />
 
     <EditText
         android:id="@+id/lastname"

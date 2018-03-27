@@ -79,7 +79,7 @@ public class profile_setup2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     new DatePickerDialog(profile_setup2.this, date, 1994, 01, 01).show();
                 }
             }
@@ -141,13 +141,14 @@ public class profile_setup2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
+                String imageName = getIntent().getStringExtra("imageName");
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                 Date date = null;
                 java.sql.Date sqlDate = null;
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
                     sqlDate = new java.sql.Date(date.getTime());
-                    Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    Abonne Abn = new Abonne(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), adresse.getText().toString(), sqlDate,imageName);
                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     register_req(gson.toJson(Abn), view);
                 } catch (ParseException e) {
