@@ -46,7 +46,6 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
     RequestOptions option;
 
 
-
     public accountListAdapter(Context mContext, List<Medecin> medecinList) {
         this.mContext = mContext;
         this.medecinList = medecinList;
@@ -72,8 +71,8 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
 
         //Glide holder
         String baseUrl = mContext.getString(R.string.server_link);
-        if (medecinList.get(position).getImage_src()!=null)
-        Glide.with(mContext).load(baseUrl+"/"+medecinList.get(position).getImage_src()).apply(option).into(holder.image_r);
+        if (medecinList.get(position).getImage_src() != null)
+            Glide.with(mContext).load(baseUrl + "/" + medecinList.get(position).getImage_src()).apply(option).into(holder.image_r);
     }
 
     @Override
@@ -91,10 +90,8 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         TextView user_spec;
         TextView dissmiss, profile_name, profile_spec, date_ness, phone, adress;
         RequestOptions option;
-        ImageView image_r,profile_image_r;
+        ImageView image_r, profile_image_r;
         private RequestQueue requestQueue;
-
-
 
 
         public ViewHolder(View itemView, Context mContext, List<Medecin> medecins, ViewGroup parent) {
@@ -114,10 +111,10 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         public void onClick(View view) {
             int position = getAdapterPosition();
             Medecin med = medecins.get(position);
-            showPopup(view, med,medecins);
+            showPopup(view, med, medecins);
         }
 
-        public void showPopup(View view, final Medecin med, final List<Medecin>medecins) {
+        public void showPopup(View view, final Medecin med, final List<Medecin> medecins) {
             View popupView = LayoutInflater.from(mcontext).inflate(layout.medecin_list_popup, null);
             popupView.startAnimation(AnimationUtils.loadAnimation(mcontext, android.R.anim.fade_in));
 
@@ -128,13 +125,15 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             date_ness = popupWindow.getContentView().findViewById(id.date_ness);
             phone = popupWindow.getContentView().findViewById(id.phone);
             adress = popupWindow.getContentView().findViewById(id.adress);
-            profile_image_r = popupWindow.getContentView().findViewById(id.image);
+            profile_image_r = popupWindow.getContentView().findViewById(id.image_u);
             Button accepterBtn = popupWindow.getContentView().findViewById(id.accepter_btn);
             Button refuserBtn = popupWindow.getContentView().findViewById(id.refuser_btn);
             requestQueue = Volley.newRequestQueue(mcontext);
             String baseUrl = mcontext.getString(R.string.server_link);
-            if (med.getImage_src()!=null)
-                Glide.with(mcontext).load(baseUrl+"/"+med.getImage_src()).apply(option).into(profile_image_r);
+            //Request option for Glide
+            option = new RequestOptions().centerCrop().placeholder(R.drawable.user).error(R.drawable.user);
+            if (med.getImage_src() != null)
+                Glide.with(mcontext).load(baseUrl + "/" + med.getImage_src()).apply(option).into(profile_image_r);
 
             String name = med.getPrenom() + " " + med.getNom();
             profile_name.setText(name);
@@ -152,62 +151,61 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                 @Override
                 public void onClick(View view) {
                     Long id = med.getId();
-                    acceptRequest(id,view,medecins);
+                    acceptRequest(id, view, medecins);
                 }
 
                 private void acceptRequest(final Long id, View view, final List<Medecin> medecins) {
-                        String baseUrl = mcontext.getString(R.string.server_link);
-                        final StringRequest arrReq = new StringRequest(Request.Method.PUT, baseUrl + "/acceptmedecin",
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        try {
-                                            if (response.equals("1")) {
-                                                Toast toast = Toast.makeText(mcontext, "La demande est acceptée ", Toast.LENGTH_SHORT);
-                                                toast.show();
-                                                popupWindow.dismiss();
-                                                medecins.remove(med); //Actually change your list of items here
-                                                adapter.notifyDataSetChanged(); //notify for change
-                                            }
-                                            else {
-                                                Toast toast = Toast.makeText(mcontext, "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
-                                                toast.show();
-                                            }
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
+                    String baseUrl = mcontext.getString(R.string.server_link);
+                    final StringRequest arrReq = new StringRequest(Request.Method.PUT, baseUrl + "/acceptmedecin",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    try {
+                                        if (response.equals("1")) {
+                                            Toast toast = Toast.makeText(mcontext, "La demande est acceptée ", Toast.LENGTH_SHORT);
+                                            toast.show();
+                                            popupWindow.dismiss();
+                                            medecins.remove(med); //Actually change your list of items here
+                                            adapter.notifyDataSetChanged(); //notify for change
+                                        } else {
+                                            Toast toast = Toast.makeText(mcontext, "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
+                                            toast.show();
                                         }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
                                     }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Toast toast = Toast.makeText(mcontext, "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-                                }) {
-                            @Override
-                            public Map<String, String> getHeaders() throws AuthFailureError {
-                                Map<String, String> params = new HashMap<>();
-                                params.put("Content-Type", "application/json");
-                                return params;
-                            }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    Toast toast = Toast.makeText(mcontext, "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                }
+                            }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<>();
+                            params.put("Content-Type", "application/json");
+                            return params;
+                        }
 
-                            @Override
-                            public byte[] getBody() throws AuthFailureError {
-                                Medecin medecin = new Medecin(id);
-                                Gson json = new Gson();
-                                String params = json.toJson(medecin);
-                                return params.getBytes();
-                            }
-                        };
-                        requestQueue.add(arrReq);
-                    }
+                        @Override
+                        public byte[] getBody() throws AuthFailureError {
+                            Medecin medecin = new Medecin(id);
+                            Gson json = new Gson();
+                            String params = json.toJson(medecin);
+                            return params.getBytes();
+                        }
+                    };
+                    requestQueue.add(arrReq);
+                }
             });
             refuserBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Long id = med.getId();
-                    refuseRequest(id,view,medecins);
+                    refuseRequest(id, view, medecins);
                 }
 
                 private void refuseRequest(final Long id, View view, final List<Medecin> medecins) {
@@ -223,8 +221,7 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                                             popupWindow.dismiss();
                                             medecins.remove(med); //Actually change your list of items here
                                             adapter.notifyDataSetChanged(); //notify for change
-                                        }
-                                        else {
+                                        } else {
                                             Toast toast = Toast.makeText(mcontext, "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
                                             toast.show();
                                         }
@@ -262,7 +259,6 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
 
         }
-
 
 
     }
