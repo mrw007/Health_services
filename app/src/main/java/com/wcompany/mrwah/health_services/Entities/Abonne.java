@@ -64,6 +64,19 @@ public class Abonne {
         this.image_src = image_src;
     }
 
+    public Abonne(Long id, String login, String password, String nom, String prenom, String mail, String tel, String adresse, Date dateNaissance, String image_src) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.dateNaissance = dateNaissance;
+        this.image_src = image_src;
+    }
+
     public Long getId() {
         return id;
     }
