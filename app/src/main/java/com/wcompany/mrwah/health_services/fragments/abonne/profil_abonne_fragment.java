@@ -83,7 +83,6 @@ public class profil_abonne_fragment extends Fragment {
     }
 
     private void getImage(View rootView) {
-        Log.i("image",abn.getImage_src());
         if (abn.getImage_src() != null) {
             baseUrl = getString(R.string.server_link);
             Glide.with(rootView.getContext()).load(baseUrl+"/"+abn.getImage_src()).apply(option).into(image_r);

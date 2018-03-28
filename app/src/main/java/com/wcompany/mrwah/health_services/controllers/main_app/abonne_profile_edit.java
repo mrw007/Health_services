@@ -171,6 +171,7 @@ public class abonne_profile_edit extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         adress = findViewById(R.id.adress);
     }
+
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.FRENCH);
@@ -187,7 +188,7 @@ public class abonne_profile_edit extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.done:
-                if (firstname_R.validate() && lastname_R.validate() && date_ness_R.validate() && email_R.validate()  && phone_R.validate() && adress_R.validate()) {
+                if (firstname_R.validate() && lastname_R.validate() && date_ness_R.validate() && email_R.validate() && phone_R.validate() && adress_R.validate()) {
 
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                     Date daten = null;
@@ -195,7 +196,7 @@ public class abonne_profile_edit extends AppCompatActivity {
                     try {
                         daten = dateFormat.parse(date_ness.getText().toString());
                         sqlDate = new java.sql.Date(daten.getTime());
-                        Abonne abn = new Abonne (ab.getId(), ab.getLogin(), ab.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), adress.getText().toString(), sqlDate);
+                        Abonne abn = new Abonne(ab.getId(), ab.getLogin(), ab.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), adress.getText().toString(), sqlDate, ab.getImage_src());
                         updateRequest(json.toJson(abn));
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -212,7 +213,7 @@ public class abonne_profile_edit extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        session.setAccount("account",acct);
+                        session.setAccount("account", acct);
                         Toast toast = Toast.makeText(getApplicationContext(), "Modification a été effectué avec succès", Toast.LENGTH_SHORT);
                         toast.show();
                         dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));

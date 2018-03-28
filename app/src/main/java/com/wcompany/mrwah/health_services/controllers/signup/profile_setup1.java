@@ -36,7 +36,7 @@ import java.util.UUID;
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
 public class profile_setup1 extends AppCompatActivity {
-    String filename=null;
+    String filename = null;
     Button next_btn;
     Switch ifMed;
     EditText nom, prenom;
@@ -117,7 +117,7 @@ public class profile_setup1 extends AppCompatActivity {
             } catch (IOException e) {
 
             }
-            uploadImage();
+
         }
     }
 
@@ -137,6 +137,7 @@ public class profile_setup1 extends AppCompatActivity {
         cursor.close();
         return path;
     }
+
     public String getFileName(Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
@@ -161,7 +162,7 @@ public class profile_setup1 extends AppCompatActivity {
 
     private void uploadImage() {
         String path = getPath(filePath);
-        filename= getFileName(filePath);
+        filename = getFileName(filePath);
         try {
             String uploadid = UUID.randomUUID().toString();
             new MultipartUploadRequest(this, uploadid, baseUrl + "/fileupload")
@@ -178,14 +179,16 @@ public class profile_setup1 extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if (nom_R.validate() && prenom_R.validate()) {
+                if (filePath != null)
+                    uploadImage();
                 if (ifMed.isChecked()) {
                     Intent Doctor = new Intent(view.getContext(), profile_setup2_2.class);
                     Doctor.putExtra("nom", nom.getText().toString());
                     Doctor.putExtra("prenom", prenom.getText().toString());
                     Doctor.putExtra("username", getIntent().getStringExtra("username"));
                     Doctor.putExtra("pass", getIntent().getStringExtra("pass"));
-                    if (filename!=null)
-                    Doctor.putExtra("imageName",filename);
+                    if (filename != null)
+                        Doctor.putExtra("imageName", filename);
                     startActivity(Doctor);
                 } else {
                     Intent User = new Intent(view.getContext(), profile_setup2.class);
@@ -193,8 +196,8 @@ public class profile_setup1 extends AppCompatActivity {
                     User.putExtra("prenom", prenom.getText().toString());
                     User.putExtra("username", getIntent().getStringExtra("username"));
                     User.putExtra("pass", getIntent().getStringExtra("pass"));
-                    if (filename!=null)
-                        User.putExtra("imageName",filename);
+                    if (filename != null)
+                        User.putExtra("imageName", filename);
                     startActivity(User);
                 }
             }

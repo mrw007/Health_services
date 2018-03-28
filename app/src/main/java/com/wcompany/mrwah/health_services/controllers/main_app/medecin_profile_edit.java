@@ -202,7 +202,7 @@ public class medecin_profile_edit extends AppCompatActivity {
                     try {
                         daten = dateFormat.parse(date_ness.getText().toString());
                         sqlDate = new java.sql.Date(daten.getTime());
-                        Medecin m = new Medecin(med.getId(), med.getLogin(), med.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), med.getSpecialite(), pro_tel.getText().toString(), adress.getText().toString(), med.getValidation(), sqlDate);
+                        Medecin m = new Medecin(med.getId(), med.getLogin(), med.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), med.getSpecialite(), pro_tel.getText().toString(), adress.getText().toString(), med.getValidation(), sqlDate,med.getImage_src());
                         updateRequest(json.toJson(m));
                     } catch (ParseException e) {
                         e.printStackTrace();

@@ -19,6 +19,7 @@ public class Medecin {
     private String adresseCabinet;
     private int validation;
     private Date dateNaissance;
+    private String image_src;
 
     public Medecin(Long id) {
         this.id = id;
@@ -70,6 +71,36 @@ public class Medecin {
         this.telCabinet = telCabinet;
         this.adresseCabinet = adresseCabinet;
         this.dateNaissance = dateNaissance;
+    }
+
+    public Medecin(String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet,  Date dateNaissance, String image_src) {
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.specialite = specialite;
+        this.telCabinet = telCabinet;
+        this.adresseCabinet = adresseCabinet;
+        this.dateNaissance = dateNaissance;
+        this.image_src = image_src;
+    }
+
+    public Medecin(Long id, String login, String password, String nom, String prenom, String mail, String tel, String specialite, String telCabinet, String adresseCabinet, int validation, Date dateNaissance, String image_src) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.specialite = specialite;
+        this.telCabinet = telCabinet;
+        this.adresseCabinet = adresseCabinet;
+        this.validation = validation;
+        this.dateNaissance = dateNaissance;
+        this.image_src = image_src;
     }
 
     public Long getId() {
@@ -183,5 +214,13 @@ public class Medecin {
 
     public void setValidation(int validation) {
         this.validation = validation;
+    }
+
+    public String getImage_src() {
+        return image_src;
+    }
+
+    public void setImage_src(String image_src) {
+        this.image_src = image_src;
     }
 }

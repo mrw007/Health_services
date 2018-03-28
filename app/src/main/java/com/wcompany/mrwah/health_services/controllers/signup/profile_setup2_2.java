@@ -152,6 +152,7 @@ public class profile_setup2_2 extends AppCompatActivity {
                 String prenom = getIntent().getStringExtra("prenom");
                 String username = getIntent().getStringExtra("username");
                 String pass = getIntent().getStringExtra("pass");
+                String imageName = getIntent().getStringExtra("imageName");
                 String spec = specialite.getSelectedItem().toString();
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                 Date date = null;
@@ -159,7 +160,7 @@ public class profile_setup2_2 extends AppCompatActivity {
                 try {
                     date = dateFormat.parse(date_naiss.getText().toString());
                     sqlDate = new java.sql.Date(date.getTime());
-                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), spec, tel.getText().toString(), adresse.getText().toString(), sqlDate);
+                    Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), spec, tel.getText().toString(), adresse.getText().toString(), sqlDate, imageName);
                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     register_req(gson.toJson(med), view);
                 } catch (ParseException e) {

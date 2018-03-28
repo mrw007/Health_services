@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.wcompany.mrwah.health_services.R;
 
@@ -40,12 +43,16 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
     public static accountListAdapter adapter;
     private Context mContext;
     private List<Medecin> medecinList;
+    RequestOptions option;
+
 
 
     public accountListAdapter(Context mContext, List<Medecin> medecinList) {
         this.mContext = mContext;
         this.medecinList = medecinList;
         adapter = this; //This is an important line, you need this line to keep track the adapter variable
+        //Request option for Glide
+        option = new RequestOptions().centerCrop().placeholder(R.drawable.user).error(R.drawable.user);
     }
 
     @Override
@@ -62,6 +69,11 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         String name = medecinList.get(position).getPrenom() + " " + medecinList.get(position).getNom();
         holder.user_name.setText(name);
         holder.user_spec.setText(medecinList.get(position).getSpecialite());
+
+        //Glide holder
+        String baseUrl = mContext.getString(R.string.server_link);
+        if (medecinList.get(position).getImage_src()!=null)
+        Glide.with(mContext).load(baseUrl+"/"+medecinList.get(position).getImage_src()).apply(option).into(holder.image_r);
     }
 
     @Override
@@ -78,6 +90,8 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
         TextView user_name;
         TextView user_spec;
         TextView dissmiss, profile_name, profile_spec, date_ness, phone, adress;
+        RequestOptions option;
+        ImageView image_r,profile_image_r;
         private RequestQueue requestQueue;
 
 
@@ -88,6 +102,8 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             itemView.setOnClickListener(this);
             user_name = itemView.findViewById(id.profile_name);
             user_spec = itemView.findViewById(id.profile_spec);
+            image_r = itemView.findViewById(id.image);
+
             this.medecins = medecins;
             this.mcontext = mContext;
             this.parent = parent;
@@ -112,9 +128,13 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             date_ness = popupWindow.getContentView().findViewById(id.date_ness);
             phone = popupWindow.getContentView().findViewById(id.phone);
             adress = popupWindow.getContentView().findViewById(id.adress);
+            profile_image_r = popupWindow.getContentView().findViewById(id.profile_image);
             Button accepterBtn = popupWindow.getContentView().findViewById(id.accepter_btn);
             Button refuserBtn = popupWindow.getContentView().findViewById(id.refuser_btn);
             requestQueue = Volley.newRequestQueue(mcontext);
+            String baseUrl = mcontext.getString(R.string.server_link);
+            if (med.getImage_src()!=null)
+                Glide.with(mcontext).load(baseUrl+"/"+med.getImage_src()).apply(option).into(profile_image_r);
 
             String name = med.getPrenom() + " " + med.getNom();
             profile_name.setText(name);
