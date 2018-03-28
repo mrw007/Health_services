@@ -102,7 +102,7 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             itemView.setOnClickListener(this);
             user_name = itemView.findViewById(id.profile_name);
             user_spec = itemView.findViewById(id.profile_spec);
-            image_r = itemView.findViewById(id.image);
+            image_r = itemView.findViewById(id.profile_image);
 
             this.medecins = medecins;
             this.mcontext = mContext;
@@ -128,7 +128,7 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
             date_ness = popupWindow.getContentView().findViewById(id.date_ness);
             phone = popupWindow.getContentView().findViewById(id.phone);
             adress = popupWindow.getContentView().findViewById(id.adress);
-            profile_image_r = popupWindow.getContentView().findViewById(id.profile_image);
+            profile_image_r = popupWindow.getContentView().findViewById(id.image);
             Button accepterBtn = popupWindow.getContentView().findViewById(id.accepter_btn);
             Button refuserBtn = popupWindow.getContentView().findViewById(id.refuser_btn);
             requestQueue = Volley.newRequestQueue(mcontext);
