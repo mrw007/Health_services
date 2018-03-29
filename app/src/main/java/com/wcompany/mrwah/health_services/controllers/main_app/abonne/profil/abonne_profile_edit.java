@@ -114,7 +114,7 @@ public class abonne_profile_edit extends AppCompatActivity {
         lastname_R.addValidation(lastname, "[a-zA-Z\\s]+", "Champs Requis");
         email_R.addValidation(email, Patterns.EMAIL_ADDRESS, "Champs requis");
         phone_R.addValidation(phone, Patterns.PHONE, "Champs requis");
-        adress_R.addValidation(adress, "[a-zA-Z0-9\\s]+", "Champs requis");
+        adress_R.addValidation(adress, "[a-zA-Z0-9\\s~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]+", "Champs requis");
         date_ness_R.addValidation(date_ness, new SimpleCustomValidation() {
             @Override
             public boolean compare(String input) {

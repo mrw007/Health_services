@@ -54,7 +54,7 @@ public class login extends AppCompatActivity {
         username_R = new AwesomeValidation(COLORATION);
         username_R.setColor(R.color.colorAccent);  // optional, default color is RED if not set
         // Step 2: add validations
-        username_R.addValidation(username, "[a-zA-Z0-9\\s]+", "Nom d'utilisateur est requis");
+        username_R.addValidation(username, "[a-zA-Z0-9._-]{4,}", "Nom d'utilisateur est requis");
     }
 
 

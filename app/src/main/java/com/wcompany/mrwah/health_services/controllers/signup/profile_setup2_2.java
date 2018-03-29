@@ -135,7 +135,7 @@ public class profile_setup2_2 extends AppCompatActivity {
         }, "Vérifier Date");
         tel_R.addValidation(tel, Patterns.PHONE, "Champs requis");
         email_R.addValidation(email, Patterns.EMAIL_ADDRESS, "Champs requis");
-        adresse_R.addValidation(adresse, adresse, "Les deux champs ne sont pas conformes");
+        adresse_R.addValidation(adresse, "[a-zA-Z0-9\\s~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]+", "Champs requis");
     }
 
     private void updateLabel() {

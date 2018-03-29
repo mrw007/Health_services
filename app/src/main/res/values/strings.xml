@@ -2,7 +2,7 @@
     <string name="app_name">Caritus</string>
 
     <string name="title_activity_walk_through">walk_through</string>
-    <string name="server_link">http://192.168.1.3:8080</string>
+    <string name="server_link">http://192.168.1.12:8080</string>
     <string name="title_activity_home_medecin">home_medecin</string>
     <string name="title_home">Acceuil</string>
     <string name="title_dashboard">Dashboard</string>
