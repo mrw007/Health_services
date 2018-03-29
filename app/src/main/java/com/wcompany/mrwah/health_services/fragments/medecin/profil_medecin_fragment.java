@@ -1,6 +1,5 @@
 package com.wcompany.mrwah.health_services.fragments.medecin;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,17 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -30,10 +26,7 @@ import com.wcompany.mrwah.health_services.Entities.Medecin;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.adapters.medecinProfileDetailsListAdapter;
-import com.wcompany.mrwah.health_services.controllers.login.login;
-import com.wcompany.mrwah.health_services.controllers.main_app.home_medecin;
-
-import org.json.JSONObject;
+import com.wcompany.mrwah.health_services.controllers.main_app.medecin.profil.medecin_profile_edit;
 
 /**
  * Created by mrwah on 3/25/2018.
@@ -65,25 +58,32 @@ public class profil_medecin_fragment extends Fragment {
             //RecyclerView
             recyclerView = rootView.findViewById(R.id.medecin_profile_details_list);
             recyclerView.setHasFixedSize(true);
-            session = new Session(getActivity().getApplicationContext());
 
             //Request option for Glide
             option = new RequestOptions().centerCrop().placeholder(R.drawable.user).error(R.drawable.user);
 
             //Getting Session
-            String acc = session.getAccount();
-            med = json.fromJson(acc, Medecin.class);
-            String name = med.getPrenom() + " " + med.getNom();
-            TextView nom = rootView.findViewById(R.id.profile_name);
-            nom.setText(name);
-            TextView spec = rootView.findViewById(R.id.profile_spec);
-            image_r = rootView.findViewById(R.id.image);
-            spec.setText(med.getSpecialite());
+            try {
+                if (session==null)
+                    session = new Session(getActivity().getApplicationContext());
+                String acc = session.getAccount();
+                med = json.fromJson(acc, Medecin.class);
+                String name = med.getPrenom() + " " + med.getNom();
+                TextView nom = rootView.findViewById(R.id.profile_name);
+                nom.setText(name);
+                TextView spec = rootView.findViewById(R.id.profile_spec);
+                image_r = rootView.findViewById(R.id.image);
+                spec.setText(med.getSpecialite());
 
-            getImage(rootView);
-            adapter = new medecinProfileDetailsListAdapter(rootView.getContext(), med);
-            recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
-            recyclerView.setAdapter(adapter);
+                getImage(rootView);
+                adapter = new medecinProfileDetailsListAdapter(rootView.getContext(), med);
+                recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+                recyclerView.setAdapter(adapter);
+            }catch (Exception e){
+                e.fillInStackTrace();
+
+            }
+
         }
         return rootView;
     }
@@ -109,7 +109,7 @@ public class profil_medecin_fragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.edit:
-                Intent edit = new Intent(((AppCompatActivity) getActivity()), com.wcompany.mrwah.health_services.controllers.main_app.medecin_profile_edit.class);
+                Intent edit = new Intent(((AppCompatActivity) getActivity()), medecin_profile_edit.class);
                 edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(edit);
                 return true;

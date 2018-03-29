@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.abonne_profile_edit">
+    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.abonne.profil.abonne_profile_edit">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/profile_toolbar"

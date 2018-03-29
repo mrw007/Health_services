@@ -97,6 +97,7 @@ public class login extends AppCompatActivity {
                                 session.setAccount(response.getJSONObject(1).toString(), type);
                                 Intent abonne = new Intent(view.getContext(), abonneHome.class);
                                 startActivity(abonne);
+                                break;
                             }
                             case "medecin": {
                                 Session session;
@@ -104,6 +105,7 @@ public class login extends AppCompatActivity {
                                 session.setAccount(response.getJSONObject(1).toString(), type);
                                 Intent medecin = new Intent(view.getContext(), home_medecin.class);
                                 startActivity(medecin);
+                                break;
                             }
                         }
                     } catch (JSONException e) {

@@ -7,6 +7,7 @@
     android:background="@color/not_so_white"
     android:orientation="vertical"
     tools:context="com.wcompany.mrwah.health_services.controllers.signup.profile_setup2">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,103 +16,115 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Etape 2/2"
-            android:textSize="30sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Autres informations" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/date_naiss"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/rounded_textview_borderscolored"
-        android:ems="10"
-        android:hint="Date de naissance"
-        android:inputType="date"
-        android:clickable="true"
-        android:focusable="false"
-        android:padding="13dp"
-        android:paddingStart="20dp" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Etape 2/2"
+                    android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/rounded_textview_borderscolored"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        android:padding="13dp"
-        android:paddingStart="20dp" />
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/rounded_textview_borderscolored"
-        android:ems="10"
-        android:hint="Téléphone"
-        android:inputType="phone"
-        android:padding="13dp"
-        android:paddingStart="20dp" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Autres informations" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/date_naiss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/rounded_textview_borderscolored"
+                android:clickable="true"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Date de naissance"
+                android:inputType="date"
+                android:padding="13dp"
+                android:paddingStart="20dp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/rounded_textview_borderscolored"
+                android:ems="10"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"
+                android:padding="13dp"
+                android:paddingStart="20dp" />
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/rounded_textview_borderscolored"
+                android:ems="10"
+                android:hint="Téléphone"
+                android:inputType="phone"
+                android:padding="13dp"
+                android:paddingStart="20dp" />
 
 
-    <EditText
-        android:id="@+id/adress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/rounded_textview_borderscolored"
-        android:ems="10"
-        android:hint="Adresse"
-        android:padding="13dp"
-        android:paddingStart="20dp"
-        android:inputType="textMultiLine" />
+            <EditText
+                android:id="@+id/adress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/rounded_textview_borderscolored"
+                android:ems="10"
+                android:hint="Adresse"
+                android:inputType="textMultiLine"
+                android:padding="13dp"
+                android:paddingStart="20dp" />
 
-    <Button
-        android:id="@+id/finsh_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
-        android:alpha="0.8"
-        android:background="@drawable/rounded_button_colored"
-        android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        android:paddingTop="5dp"
-        android:text="Terminé"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp" />
+            <Button
+                android:id="@+id/finsh_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:alpha="0.8"
+                android:background="@drawable/rounded_button_colored"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:paddingTop="5dp"
+                android:text="Terminé"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

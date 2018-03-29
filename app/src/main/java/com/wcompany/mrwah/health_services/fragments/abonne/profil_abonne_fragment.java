@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +26,7 @@ import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.adapters.abonneProfileDetailsListAdapter;
+import com.wcompany.mrwah.health_services.controllers.main_app.abonne.profil.abonne_profile_edit;
 
 /**
  * Created by mrwah on 3/25/2018.
@@ -103,7 +103,7 @@ public class profil_abonne_fragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case R.id.edit:
-                Intent edit = new Intent(((AppCompatActivity) getActivity()), com.wcompany.mrwah.health_services.controllers.main_app.abonne_profile_edit.class);
+                Intent edit = new Intent(((AppCompatActivity) getActivity()), abonne_profile_edit.class);
                 edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(edit);
                 return true;

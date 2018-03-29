@@ -30,6 +30,7 @@ public class abonneHome extends AppCompatActivity implements BottomNavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abonne_home);
         session = new Session(getApplicationContext());
+        loadFragment(new home_abonne_fragment());
         if (session.getAccount().equals("")) {
             Intent login = new Intent(getBaseContext(), com.wcompany.mrwah.health_services.controllers.login.login.class);
             login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -37,7 +38,6 @@ public class abonneHome extends AppCompatActivity implements BottomNavigationVie
         }
         BottomNavigationViewEx navigation = findViewById(R.id.navigation_abn);
         navigation.setOnNavigationItemSelectedListener(this);
-        loadFragment(new home_abonne_fragment());
         navigation.enableAnimation(true);
         navigation.enableShiftingMode(false);
         navigation.enableItemShiftingMode(true);
@@ -92,7 +92,7 @@ public class abonneHome extends AppCompatActivity implements BottomNavigationVie
                     }
                 })
                 .setNegativeButton("Non", null);
-        AlertDialog alertDialog =builder.create();
+        AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
 }

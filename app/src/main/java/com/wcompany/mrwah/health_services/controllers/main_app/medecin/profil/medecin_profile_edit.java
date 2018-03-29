@@ -1,9 +1,11 @@
-package com.wcompany.mrwah.health_services.controllers.main_app;
+package com.wcompany.mrwah.health_services.controllers.main_app.medecin.profil;
+
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.KeyEvent;
@@ -24,10 +26,10 @@ import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.custom.SimpleCustomValidation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Medecin;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
+import com.wcompany.mrwah.health_services.controllers.main_app.home_medecin;
 
 import org.json.JSONObject;
 
@@ -40,29 +42,37 @@ import java.util.Locale;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.COLORATION;
 
-public class abonne_profile_edit extends AppCompatActivity {
-
+public class medecin_profile_edit extends AppCompatActivity {
     Toolbar edit_profile_toolbar;
-    EditText firstname, lastname, date_ness, email, phone, adress;
-    private AwesomeValidation firstname_R, lastname_R, date_ness_R, email_R, phone_R, adress_R;
+    EditText firstname, lastname, date_ness, email, pro_tel, phone, adress;
+    private AwesomeValidation firstname_R, lastname_R, date_ness_R, email_R, pro_tel_R, phone_R, adress_R;
     Calendar Cal_date_naiss;
     private Gson json;
     private Session session;
-    private Abonne ab;
+    private Medecin med;
     RequestQueue requestQueue;
     String baseUrl;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abonne_profile_edit);
-        edit_profile_toolbar = findViewById(R.id.profile_toolbar);
+
+        //Toolbar
+        setContentView(R.layout.activity_medecin_profile_edit);
+        edit_profile_toolbar = findViewById(R.id.edit_toolbar);
         setSupportActionBar(edit_profile_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        init();
+        //EditTexts
+        firstname = findViewById(R.id.firstname);
+        lastname = findViewById(R.id.lastname);
+        date_ness = findViewById(R.id.date_ness);
+        email = findViewById(R.id.email);
+        pro_tel = findViewById(R.id.pro_tel);
+        phone = findViewById(R.id.phone);
+        adress = findViewById(R.id.adress);
+
         //Calendar
         Cal_date_naiss = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -77,12 +87,13 @@ public class abonne_profile_edit extends AppCompatActivity {
         };
         getInfos();
         validationConfig();
+
         date_ness.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    new DatePickerDialog(abonne_profile_edit.this, date, 1994, 01, 01).show();
+                    new DatePickerDialog(medecin_profile_edit.this, date, 1994, 01, 01).show();
                 }
             }
         });
@@ -96,6 +107,7 @@ public class abonne_profile_edit extends AppCompatActivity {
         lastname_R = new AwesomeValidation(COLORATION);
         date_ness_R = new AwesomeValidation(COLORATION);
         email_R = new AwesomeValidation(COLORATION);
+        pro_tel_R = new AwesomeValidation(COLORATION);
         phone_R = new AwesomeValidation(COLORATION);
         adress_R = new AwesomeValidation(COLORATION);
 
@@ -104,6 +116,7 @@ public class abonne_profile_edit extends AppCompatActivity {
         lastname_R.setColor(R.color.colorAccent);
         date_ness_R.setColor(R.color.colorAccent);
         email_R.setColor(R.color.colorAccent);
+        pro_tel_R.setColor(R.color.colorAccent);
         phone_R.setColor(R.color.colorAccent);
         adress_R.setColor(R.color.colorAccent);
 
@@ -112,6 +125,7 @@ public class abonne_profile_edit extends AppCompatActivity {
         firstname_R.addValidation(firstname, "[a-zA-Z\\s]+", "Champs Requis");
         lastname_R.addValidation(lastname, "[a-zA-Z\\s]+", "Champs Requis");
         email_R.addValidation(email, Patterns.EMAIL_ADDRESS, "Champs requis");
+        pro_tel_R.addValidation(pro_tel, Patterns.PHONE, "Champs requis");
         phone_R.addValidation(phone, Patterns.PHONE, "Champs requis");
         adress_R.addValidation(adress, "[a-zA-Z0-9\\s]+", "Champs requis");
         date_ness_R.addValidation(date_ness, new SimpleCustomValidation() {
@@ -142,34 +156,31 @@ public class abonne_profile_edit extends AppCompatActivity {
                 return false;
             }
         }, "Vérifier Date");
-
     }
 
     private void getInfos() {
         //Retrieve informations from session
         json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         session = new Session(getApplicationContext());
-        String acc = session.getAccount();
-        ab = json.fromJson(acc, Abonne.class);
+        try {
+            String acc = session.getAccount();
+            med = json.fromJson(acc, Medecin.class);
 
-        //setting the fields
-        firstname.setText(ab.getPrenom());
-        lastname.setText(ab.getNom());
-        email.setText(ab.getMail());
-        phone.setText(ab.getTel());
-        adress.setText(ab.getAdresse());
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
-        String dateN = DATE_FORMAT.format(ab.getDateNaissance());
-        date_ness.setText(dateN);
-    }
+            //setting the fields
+            firstname.setText(med.getPrenom());
+            lastname.setText(med.getNom());
+            email.setText(med.getMail());
+            pro_tel.setText(med.getTelCabinet());
+            phone.setText(med.getTel());
+            adress.setText(med.getAdresseCabinet());
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
+            String dateN = DATE_FORMAT.format(med.getDateNaissance());
+            date_ness.setText(dateN);
 
-    private void init() {
-        firstname = findViewById(R.id.firstname);
-        lastname = findViewById(R.id.lastname);
-        date_ness = findViewById(R.id.date_ness);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
-        adress = findViewById(R.id.adress);
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+
     }
 
     private void updateLabel() {
@@ -178,9 +189,10 @@ public class abonne_profile_edit extends AppCompatActivity {
         date_ness.setText(sdf.format(Cal_date_naiss.getTime()));
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.abonne_edit_profile_menu, menu);
+        getMenuInflater().inflate(R.menu.medcin_edit_profile_menu, menu);
         return true;
     }
 
@@ -188,7 +200,7 @@ public class abonne_profile_edit extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.done:
-                if (firstname_R.validate() && lastname_R.validate() && date_ness_R.validate() && email_R.validate() && phone_R.validate() && adress_R.validate()) {
+                if (firstname_R.validate() && lastname_R.validate() && date_ness_R.validate() && email_R.validate() && pro_tel_R.validate() && phone_R.validate() && adress_R.validate()) {
 
                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
                     Date daten = null;
@@ -196,8 +208,8 @@ public class abonne_profile_edit extends AppCompatActivity {
                     try {
                         daten = dateFormat.parse(date_ness.getText().toString());
                         sqlDate = new java.sql.Date(daten.getTime());
-                        Abonne abn = new Abonne(ab.getId(), ab.getLogin(), ab.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), adress.getText().toString(), sqlDate, ab.getImage_src());
-                        updateRequest(json.toJson(abn));
+                        Medecin m = new Medecin(med.getId(), med.getLogin(), med.getPassword(), lastname.getText().toString(), firstname.getText().toString(), email.getText().toString(), phone.getText().toString(), med.getSpecialite(), pro_tel.getText().toString(), adress.getText().toString(), med.getValidation(), sqlDate, med.getImage_src());
+                        updateRequest(json.toJson(m));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -209,13 +221,15 @@ public class abonne_profile_edit extends AppCompatActivity {
     }
 
     private void updateRequest(final String acct) {
-        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.PUT, baseUrl + "/updateAbonne", acct,
+        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.PUT, baseUrl + "/updateMedecin", acct,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        session.setAccount("account", acct);
+                        session.setAccount(acct,session.getType());
                         Toast toast = Toast.makeText(getApplicationContext(), "Modification a été effectué avec succès", Toast.LENGTH_SHORT);
                         toast.show();
+                        Intent intent = new Intent(medecin_profile_edit.this, home_medecin.class);
+                        startActivityForResult(intent, 1);
                         dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
                         dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
                     }
@@ -228,6 +242,15 @@ public class abonne_profile_edit extends AppCompatActivity {
                     }
                 });
         requestQueue.add(arrReq);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            Intent refresh = new Intent(this, home_medecin.class);
+            startActivity(refresh);
+            this.finish();
+        }
     }
 
 }

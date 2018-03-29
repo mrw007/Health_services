@@ -15,7 +15,14 @@
         android:background="@color/not_so_white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -127,4 +134,7 @@
         android:text="Terminé"
         android:textColor="@color/colorWhite"
         android:textSize="18sp" />
+</LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
