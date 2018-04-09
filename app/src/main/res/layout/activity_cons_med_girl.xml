@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical.cons_med_girl">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/not_so_white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp"
+        android:layout_marginTop="10dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_girl" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="145dp"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="14dp"
+            android:layout_toEndOf="@+id/radioButton"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton"
+            android:layout_alignStart="@+id/radioButton"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="-3dp"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-3dp"
+            android:layout_alignBaseline="@+id/radioButton2"
+            android:layout_alignBottom="@+id/radioButton2"
+            android:layout_alignStart="@+id/radioButton1"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="48dp"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/radioButton4"
+            android:layout_marginStart="-3dp"
+            android:layout_marginTop="18dp"
+            android:layout_toEndOf="@+id/radioButton3"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton5"
+            android:layout_alignBottom="@+id/radioButton5"
+            android:layout_marginEnd="17dp"
+            android:layout_toStartOf="@+id/radioButton4"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton4"
+            android:layout_marginStart="6dp"
+            android:layout_toEndOf="@+id/radioButton2"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton7"
+            android:layout_alignBottom="@+id/radioButton7"
+            android:layout_toStartOf="@+id/radioButton7"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/radioButton6"
+            android:layout_centerVertical="true"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton9"
+            android:layout_alignBottom="@+id/radioButton9"
+            android:layout_toEndOf="@+id/radioButton7"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton7"
+            android:layout_alignStart="@+id/radioButton4"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton10"
+            android:layout_toEndOf="@+id/radioButton13"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton12"
+            android:layout_alignBottom="@+id/radioButton12"
+            android:layout_toEndOf="@+id/radioButton9"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton12"
+            android:layout_alignStart="@+id/radioButton11"
+            android:layout_marginBottom="11dp"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton12"
+            android:layout_toEndOf="@+id/radioButton14"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton12"
+            android:layout_toEndOf="@+id/radioButton14"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton13"
+            android:layout_toStartOf="@+id/radioButton14"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton14"
+            android:layout_alignStart="@+id/radioButton14"
+            android:layout_marginBottom="20dp"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/radioButton18"
+            android:layout_alignStart="@+id/radioButton18"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton21"
+            android:layout_alignBottom="@+id/radioButton21"
+            android:layout_toEndOf="@+id/radioButton18"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/radioButton19"
+            android:layout_marginTop="14dp"
+            android:layout_toStartOf="@+id/radioButton18"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton19"
+            android:layout_alignBottom="@+id/radioButton19"
+            android:layout_toStartOf="@+id/radioButton21"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/radioButton19"
+            android:layout_alignBottom="@+id/radioButton19"
+            android:layout_toEndOf="@+id/radioButton20"
+            android:buttonTint="@color/colorWhite"
+            android:text="" />
+
+        <RadioButton
+            android:id="@+id/radioButton24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:buttonTint="@color/colorWhite"
+            android:layout_centerHorizontal="true"
+            android:text="" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:alpha="0.8"
+        android:background="@drawable/rounded_button_colored"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:paddingTop="5dp"
+        android:text="Continuer"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+</RelativeLayout>

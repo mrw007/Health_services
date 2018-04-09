@@ -49,6 +49,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wcompany.mrwah.health_services.controllers.main_app.abonneHome" />
         </activity>
+        <activity android:name=".controllers.main_app.conseil_medical.cons_med_state1" />
+        <activity android:name=".controllers.main_app.conseil_medical.cons_med_girl" />
+        <activity android:name=".controllers.main_app.conseil_medical.cons_med_boy" />
+        <activity android:name=".controllers.main_app.conseil_medical.cons_med_state2"></activity>
     </application>
 
 </manifest>
