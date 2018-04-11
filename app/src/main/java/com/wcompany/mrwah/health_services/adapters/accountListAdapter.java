@@ -1,6 +1,7 @@
 package com.wcompany.mrwah.health_services.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,11 +20,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.wcompany.mrwah.health_services.Entities.mailing;
 import com.wcompany.mrwah.health_services.R;
 
 import java.util.HashMap;
@@ -31,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.wcompany.mrwah.health_services.Entities.Medecin;
+
+import org.json.JSONObject;
 
 import static com.wcompany.mrwah.health_services.R.*;
 
@@ -151,10 +156,12 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                 @Override
                 public void onClick(View view) {
                     Long id = med.getId();
-                    acceptRequest(id, view, medecins);
+                    String to = med.getMail();
+                    acceptRequest(id, view, to, medecins);
                 }
 
-                private void acceptRequest(final Long id, View view, final List<Medecin> medecins) {
+
+                private void acceptRequest(final Long id, View view, final String to, final List<Medecin> medecins) {
                     String baseUrl = mcontext.getString(R.string.server_link);
                     final StringRequest arrReq = new StringRequest(Request.Method.PUT, baseUrl + "/acceptmedecin",
                             new Response.Listener<String>() {
@@ -164,6 +171,11 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                                         if (response.equals("1")) {
                                             Toast toast = Toast.makeText(mcontext, "La demande est acceptée ", Toast.LENGTH_SHORT);
                                             toast.show();
+                                            String text = "Votre compte est accepté, vous pouvez maintenant accèder à Caritus";
+                                            String subject = "Compte Caritus";
+                                            mailing mail = new mailing(to, text, subject);
+                                            Gson json = new Gson();
+                                            verif_mail(json.toJson(mail));
                                             popupWindow.dismiss();
                                             medecins.remove(med); //Actually change your list of items here
                                             adapter.notifyDataSetChanged(); //notify for change
@@ -205,10 +217,11 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                 @Override
                 public void onClick(View view) {
                     Long id = med.getId();
-                    refuseRequest(id, view, medecins);
+                    String to = med.getMail();
+                    refuseRequest(id, view, to, medecins);
                 }
 
-                private void refuseRequest(final Long id, View view, final List<Medecin> medecins) {
+                private void refuseRequest(final Long id, View view, final String to, final List<Medecin> medecins) {
                     String baseUrl = mcontext.getString(R.string.server_link);
                     final StringRequest arrReq = new StringRequest(Request.Method.PUT, baseUrl + "/refusermedecin",
                             new Response.Listener<String>() {
@@ -218,6 +231,11 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
                                         if (response.equals("true")) {
                                             Toast toast = Toast.makeText(mcontext, "La demande est refusée ", Toast.LENGTH_SHORT);
                                             toast.show();
+                                            String text = "Votre compte est refusé, veuillez verifier vous coordonnées.";
+                                            String subject = "Compte Caritus";
+                                            mailing mail = new mailing(to, text, subject);
+                                            Gson json = new Gson();
+                                            verif_mail(json.toJson(mail));
                                             popupWindow.dismiss();
                                             medecins.remove(med); //Actually change your list of items here
                                             adapter.notifyDataSetChanged(); //notify for change
@@ -260,7 +278,24 @@ public class accountListAdapter extends RecyclerView.Adapter<accountListAdapter.
 
         }
 
+        private void verif_mail(final String mail) {
+            String baseUrl = mcontext.getString(R.string.server_link);
+            JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/simpleemail", mail,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
 
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                   
+                        }
+                    });
+            requestQueue.add(arrReq);
+        }
     }
+
 
 }

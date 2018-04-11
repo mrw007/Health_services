@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.wcompany.mrwah.health_services.Entities.Medecin;
+import com.wcompany.mrwah.health_services.Entities.mailing;
 import com.wcompany.mrwah.health_services.R;
 
 import static android.app.ProgressDialog.show;
@@ -162,7 +163,8 @@ public class profile_setup2_2 extends AppCompatActivity {
                     sqlDate = new java.sql.Date(date.getTime());
                     Medecin med = new Medecin(username, pass, nom, prenom, email.getText().toString(), tel.getText().toString(), spec, tel.getText().toString(), adresse.getText().toString(), sqlDate, imageName);
                     gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    register_req(gson.toJson(med), view);
+                    String to = med.getMail();
+                    register_req(gson.toJson(med), to, view);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -171,13 +173,19 @@ public class profile_setup2_2 extends AppCompatActivity {
         }
     };
 
-    private void register_req(final String cnx, final View view) {
+    private void register_req(final String cnx, final String to, final View view) {
         JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/signupMedecin", cnx,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Inscription est terminé avec succès, Bienvenue à bord !", Toast.LENGTH_SHORT);
                         toast.show();
+                        String text = "Votre compte est en cours de validation. Vous allez reçevoir un mail de confirmation au délai de 48 heures.";
+                        String subject = "Compte Caritus";
+                        mailing mail = new mailing(to, text, subject);
+                        verif_mail(gson.toJson(mail), view);
+                        Toast toast2 = Toast.makeText(getApplicationContext(), "votre demande est en cours de validation", Toast.LENGTH_SHORT);
+                        toast2.show();
                         Intent login = new Intent(view.getContext(), com.wcompany.mrwah.health_services.controllers.login.login.class);
                         startActivity(login);
                     }
@@ -187,6 +195,23 @@ public class profile_setup2_2 extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
                         toast.show();
+                    }
+                });
+        requestQueue.add(arrReq);
+    }
+
+    private void verif_mail(final String mail, final View view) {
+        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/simpleemail", mail,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
                     }
                 });
         requestQueue.add(arrReq);
