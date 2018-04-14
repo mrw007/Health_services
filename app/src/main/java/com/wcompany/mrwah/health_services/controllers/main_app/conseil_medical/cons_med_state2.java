@@ -1,5 +1,6 @@
 package com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,5 +28,16 @@ public class cons_med_state2 extends AppCompatActivity {
                     next_btn.setText("terminé");
             }
         });
+        next_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(cons_swc.isChecked()){
+                    Intent map = new Intent(view.getContext(), cons_med_mocation.class);
+                    startActivity(map);
+                }
+
+            }
+        });
     }
+
 }
