@@ -6,7 +6,7 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical.cons_med_mocation">
+    tools:context="com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical.cons_med_location">
 
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/floating_search_view"
