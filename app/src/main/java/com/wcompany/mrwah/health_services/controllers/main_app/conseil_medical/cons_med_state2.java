@@ -66,12 +66,10 @@ public class cons_med_state2 extends AppCompatActivity {
         next_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cons_swc.isChecked()) {
-                    Intent map = new Intent(view.getContext(), cons_med_location.class);
-                    startActivity(map);
-                } else
+                if (cons_swc.isChecked())
+                    send_to_map(view);
+                else
                     generate_query();
-
             }
         });
     }
@@ -80,7 +78,6 @@ public class cons_med_state2 extends AppCompatActivity {
         int selectedId = pub.getCheckedRadioButtonId();
         RadioButton pub_mode = findViewById(selectedId);
         return pub_mode.getText().toString();
-
     }
 
     private void generate_query() {
@@ -95,12 +92,24 @@ public class cons_med_state2 extends AppCompatActivity {
         post(json.toJson(p));
     }
 
+    private void send_to_map(View view) {
+        String pub_mode = mode_pub();
+        String acc = session.getAccount();
+        Intent map = new Intent(view.getContext(), cons_med_location.class);
+        String zones = getIntent().getStringExtra("zones");
+        map.putExtra("zones", zones);
+        map.putExtra("pub_mode", pub_mode);
+        map.putExtra("description", description.getText().toString());
+        map.putExtra("abonne", acc);
+        startActivity(map);
+    }
+
     private void post(final String cnx) {
         JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/addPublication", cnx,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast toast = Toast.makeText(cons_med_state2.this, "publication est terminé avec succès, Bienvenue à bord !", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(cons_med_state2.this, "publication est terminé avec succès", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 },

@@ -18,6 +18,6 @@ public class notifs_abonne_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notifs, null);
+        return inflater.inflate(R.layout.fragment_posts_list, null);
     }
 }

@@ -19,6 +19,7 @@ import com.wcompany.mrwah.health_services.fragments.abonne.dashboard_abonne_frag
 import com.wcompany.mrwah.health_services.fragments.abonne.home_abonne_fragment;
 import com.wcompany.mrwah.health_services.fragments.abonne.notifs_abonne_fragment;
 import com.wcompany.mrwah.health_services.fragments.abonne.profil_abonne_fragment;
+import com.wcompany.mrwah.health_services.fragments.posts_list;
 
 
 public class abonneHome extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -70,7 +71,7 @@ public class abonneHome extends AppCompatActivity implements BottomNavigationVie
                 fragment = new home_abonne_fragment();
                 break;
             case R.id.navigation_dashboard:
-                fragment = new dashboard_abonne_fragment();
+                fragment = new posts_list();
                 break;
             case R.id.navigation_notifications:
                 fragment = new notifs_abonne_fragment();

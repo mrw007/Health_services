@@ -15,10 +15,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
@@ -40,13 +48,26 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.wcompany.mrwah.health_services.Entities.Abonne;
+import com.wcompany.mrwah.health_services.Entities.Publication;
+import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
+
+import org.json.JSONObject;
+
+import java.sql.Date;
 
 public class cons_med_location extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = cons_med_location.class.getSimpleName();
     private GoogleMap mMap;
     private CameraPosition mCameraPosition;
+    Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    private String baseUrl;
+    RequestQueue requestQueue;
+    public Button finish_btn;
 
     // The entry points to the Places API.
     private GeoDataClient mGeoDataClient;
@@ -82,7 +103,8 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        baseUrl = getString(R.string.server_link);
+        requestQueue = Volley.newRequestQueue(this);
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
@@ -90,10 +112,6 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
         }
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_cons_med_mocation);
-        // edit_profile_toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(edit_profile_toolbar);
-        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //  getSupportActionBar().setDisplayShowHomeEnabled(true);
         // Construct a GeoDataClient.
         mGeoDataClient = Places.getGeoDataClient(this, null);
 
@@ -102,11 +120,19 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        finish_btn = findViewById(R.id.btn_finish);
 
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        finish_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mLastKnownLocation != null)
+                    generate_query();
+            }
+        });
     }
 
     /**
@@ -211,13 +237,6 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
                 getDeviceLocation();
             }
         });
-        mSearchView.setOnBindSuggestionCallback(new SearchSuggestionsAdapter.OnBindSuggestionCallback() {
-            @Override
-            public void onBindSuggestion(View suggestionView, ImageView leftIcon, TextView textView, SearchSuggestion item, int itemPosition) {
-                //  showCurrentPlace();
-            }
-
-        });
 
     }
 
@@ -246,7 +265,6 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
-                            //mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         }
                     }
                 });
@@ -418,16 +436,48 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
         try {
             if (mLocationPermissionGranted) {
                 mMap.setMyLocationEnabled(true);
-                //mMap.getUiSettings().setMyLocationButtonEnabled(true);
-
             } else {
                 mMap.setMyLocationEnabled(false);
-                //mMap.getUiSettings().setMyLocationButtonEnabled(false);
                 mLastKnownLocation = null;
                 getLocationPermission();
             }
         } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+    private void generate_query() {
+        String zones = getIntent().getStringExtra("zones");
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
+        String pub_mode = getIntent().getStringExtra("pub_mode");
+        Boolean cons_dom = true;
+        String description = getIntent().getStringExtra("description");
+        String abonne = getIntent().getStringExtra("abonne");
+        Abonne abn = json.fromJson(abonne, Abonne.class);
+        float Latitude = (float) mLastKnownLocation.getLatitude();
+        float Longitude = (float) mLastKnownLocation.getLongitude();
+
+        Publication p = new Publication(description, zones, date, pub_mode, cons_dom, Longitude, Latitude, abn);
+        post(json.toJson(p));
+    }
+
+    private void post(final String cnx) {
+        JsonObjectRequest arrReq = new JsonObjectRequest(Request.Method.POST, baseUrl + "/addPublication", cnx,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast toast = Toast.makeText(cons_med_location.this, "publication est terminé avec succès", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Something is Wrong, Please try again", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                });
+        requestQueue.add(arrReq);
     }
 }

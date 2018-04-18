@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/not_so_white"
+    android:orientation="vertical"
+    tools:context="com.wcompany.mrwah.health_services.fragments.posts_list">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/posts_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:title="Publications"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Menu"
+        android:textAlignment="center"
+        app:titleTextColor="@color/colorWhite"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/posts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
