@@ -1,6 +1,7 @@
 package com.wcompany.mrwah.health_services.Entities;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by mrwah on 4/17/2018.
@@ -16,6 +17,17 @@ public class Publication {
     private float position_long;
     private float position_lat;
     private Abonne abonne;
+    private List<String> reponses;
+
+    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, Abonne abonne) {
+        this.id = id;
+        this.description = description;
+        this.zone = zone;
+        this.datePub = datePub;
+        this.pub_mode = pub_mode;
+        this.consultation_domicile = consultation_domicile;
+        this.abonne = abonne;
+    }
 
     public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, float position_long, float position_lat, Abonne abonne) {
         this.id = id;
@@ -26,16 +38,6 @@ public class Publication {
         this.consultation_domicile = consultation_domicile;
         this.position_long = position_long;
         this.position_lat = position_lat;
-        this.abonne = abonne;
-    }
-
-    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, Abonne abonne) {
-        this.id = id;
-        this.description = description;
-        this.zone = zone;
-        this.datePub = datePub;
-        this.pub_mode = pub_mode;
-        this.consultation_domicile = consultation_domicile;
         this.abonne = abonne;
     }
 
@@ -57,6 +59,21 @@ public class Publication {
         this.pub_mode = pub_mode;
         this.consultation_domicile = consultation_domicile;
         this.abonne = abonne;
+    }
+
+    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, float position_long, float position_lat, Abonne abonne, List<String> reponses) {
+        this.id = id;
+        this.description = description;
+        this.zone = zone;
+        this.datePub = datePub;
+        this.pub_mode = pub_mode;
+        this.consultation_domicile = consultation_domicile;
+        this.position_long = position_long;
+        this.position_lat = position_lat;
+        this.abonne = abonne;
+        this.reponses = reponses;
+
+
     }
 
     public Long getId() {
@@ -123,11 +140,20 @@ public class Publication {
         this.position_lat = position_lat;
     }
 
-    public Abonne getId_abonne() {
+    public Abonne getAbonne() {
         return abonne;
     }
 
-    public void setId_abonne(Abonne abonne) {
+    public void setAbonne(Abonne abonne) {
         this.abonne = abonne;
     }
+
+    public List<String> getReponses() {
+        return reponses;
+    }
+
+    public void setReponses(List<String> reponses) {
+        this.reponses = reponses;
+    }
+
 }

@@ -24,6 +24,7 @@ import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Publication;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
+import com.wcompany.mrwah.health_services.controllers.main_app.abonneHome;
 
 import org.json.JSONObject;
 
@@ -111,6 +112,8 @@ public class cons_med_state2 extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Toast toast = Toast.makeText(cons_med_state2.this, "publication est terminé avec succès", Toast.LENGTH_SHORT);
                         toast.show();
+                        Intent refresh = new Intent(cons_med_state2.this, abonneHome.class);
+                        startActivity(refresh);
                     }
                 },
                 new Response.ErrorListener() {

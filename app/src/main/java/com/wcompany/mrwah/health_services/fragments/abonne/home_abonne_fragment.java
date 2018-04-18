@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical.cons_med_girl;
@@ -24,7 +25,7 @@ public class home_abonne_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_abn, null);
-        Button btn = rootView.findViewById(R.id.btn_test);
+        LinearLayout btn = rootView.findViewById(R.id.btn_test);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

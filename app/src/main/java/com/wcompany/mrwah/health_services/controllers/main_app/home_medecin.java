@@ -19,6 +19,7 @@ import com.wcompany.mrwah.health_services.fragments.medecin.dashboard_medecin_fr
 import com.wcompany.mrwah.health_services.fragments.medecin.home_medecin_fragment;
 import com.wcompany.mrwah.health_services.fragments.medecin.notifs_medecin_fragment;
 import com.wcompany.mrwah.health_services.fragments.medecin.profil_medecin_fragment;
+import com.wcompany.mrwah.health_services.fragments.posts_list;
 
 public class home_medecin extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -69,7 +70,7 @@ public class home_medecin extends AppCompatActivity implements BottomNavigationV
                 fragment = new home_medecin_fragment();
                 break;
             case R.id.navigation_dashboard:
-                fragment = new dashboard_medecin_fragment();
+                fragment = new posts_list();
                 break;
             case R.id.navigation_notifications:
                 fragment = new notifs_medecin_fragment();

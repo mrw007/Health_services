@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Publication;
 import com.wcompany.mrwah.health_services.R;
 
@@ -48,14 +50,18 @@ public class posts_list_adapter extends RecyclerView.Adapter<posts_list_adapter.
 
     @Override
     public void onBindViewHolder(posts_list_adapter.ViewHolder holder, int position) {
-        //holder.userName.setText(publicationList.get(position).getId_abonne().getLogin());
-        holder.description.setText(publicationList.get(position).getDescription());
-        holder.position.setText(get_position_adress(publicationList.get(position).getPosition_long(), publicationList.get(position).getPosition_lat()));
-        holder.tagGroup.setTags(publicationList.get(position).getZone().split(";", -1));
-        //Glide holder
-       /* String baseUrl = mContext.getString(R.string.server_link);
-        if (publicationList.get(position).getId_abonne().getImage_src() != null)
-            Glide.with(mContext).load(baseUrl + "/" + publicationList.get(position).getId_abonne().getImage_src()).apply(option).into(holder.profile_image);*/
+        try {
+            holder.userName.setText(publicationList.get(position).getAbonne().getLogin());
+            holder.description.setText(publicationList.get(position).getDescription());
+            holder.position.setText(get_position_adress(publicationList.get(position).getPosition_long(), publicationList.get(position).getPosition_lat()));
+            holder.tagGroup.setTags(publicationList.get(position).getZone().split(";", -1));
+            //Glide holder
+            String baseUrl = mContext.getString(R.string.server_link);
+            Glide.with(mContext).load(baseUrl + "/" + publicationList.get(position).getAbonne().getImage_src()).apply(option).into(holder.profile_image);
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+
     }
 
     @Override

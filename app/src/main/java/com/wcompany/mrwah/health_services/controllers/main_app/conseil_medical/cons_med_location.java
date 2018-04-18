@@ -2,6 +2,7 @@ package com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
@@ -54,6 +55,7 @@ import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Publication;
 import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
+import com.wcompany.mrwah.health_services.controllers.main_app.abonneHome;
 
 import org.json.JSONObject;
 
@@ -469,6 +471,8 @@ public class cons_med_location extends AppCompatActivity implements OnMapReadyCa
                     public void onResponse(JSONObject response) {
                         Toast toast = Toast.makeText(cons_med_location.this, "publication est terminé avec succès", Toast.LENGTH_SHORT);
                         toast.show();
+                        Intent refresh = new Intent(cons_med_location.this, abonneHome.class);
+                        startActivity(refresh);
                     }
                 },
                 new Response.ErrorListener() {
