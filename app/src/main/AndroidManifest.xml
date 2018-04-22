@@ -61,6 +61,9 @@
         <activity android:name=".controllers.main_app.conseil_medical.cons_med_girl" />
         <activity android:name=".controllers.main_app.conseil_medical.cons_med_boy" />
         <activity android:name=".controllers.main_app.conseil_medical.cons_med_state2" />
+
+
+        <activity android:name=".fragments.detail_pub" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

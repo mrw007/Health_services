@@ -157,4 +157,21 @@ public class Abonne {
         this.image_src = image_src;
     }
 
+
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", mail='" + mail + '\'' +
+                ", tel='" + tel + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", dateNaissance='" + dateNaissance + '\'' +
+                ", image_src='" + image_src + '\'' +
+                '}';
+    }
+
 }

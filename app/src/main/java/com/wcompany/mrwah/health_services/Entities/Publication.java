@@ -17,7 +17,7 @@ public class Publication {
     private float position_long;
     private float position_lat;
     private Abonne abonne;
-    private List<String> reponses;
+    private List<Reponse> reponses;
 
     public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, Abonne abonne) {
         this.id = id;
@@ -61,7 +61,7 @@ public class Publication {
         this.abonne = abonne;
     }
 
-    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, float position_long, float position_lat, Abonne abonne, List<String> reponses) {
+    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, float position_long, float position_lat, Abonne abonne, List<Reponse> reponses) {
         this.id = id;
         this.description = description;
         this.zone = zone;
@@ -148,12 +148,30 @@ public class Publication {
         this.abonne = abonne;
     }
 
-    public List<String> getReponses() {
+    public List<Reponse> getReponses() {
         return reponses;
     }
 
-    public void setReponses(List<String> reponses) {
+    public void setReponses(List<Reponse> reponses) {
         this.reponses = reponses;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Publication{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", zone='" + zone + '\'' +
+                ", Date='" + datePub + '\'' +
+                ", pub_mode='" + pub_mode + '\'' +
+                ", consultation_domicile='" + consultation_domicile + '\'' +
+                ", position_long='" + position_long + '\'' +
+                ", position_lat='" + position_lat + '\'' +
+                ", Date='" + datePub + '\'' +
+                ", " + abonne   +
+                ", reponses='" + reponses + '\'' +
+                '}';
     }
 
 }
