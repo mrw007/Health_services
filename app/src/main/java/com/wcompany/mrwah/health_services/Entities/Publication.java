@@ -76,6 +76,21 @@ public class Publication {
 
     }
 
+    public Publication(Long id, String description, String zone, Date datePub, String pub_mode, boolean consultation_domicile, float position_long, float position_lat, List<Reponse> reponses, Abonne abonne) {
+        this.id = id;
+        this.description = description;
+        this.zone = zone;
+        this.datePub = datePub;
+        this.pub_mode = pub_mode;
+        this.consultation_domicile = consultation_domicile;
+        this.position_long = position_long;
+        this.position_lat = position_lat;
+        this.abonne = abonne;
+        this.reponses = reponses;
+
+
+    }
+
     public Long getId() {
         return id;
     }

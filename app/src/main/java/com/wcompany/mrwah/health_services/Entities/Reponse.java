@@ -13,17 +13,9 @@ public class Reponse {
     private Long id;
     private String message;
     private Date dateRep;
+    private Publication publication;
     private Medecin medecin;
 
-    public Publication getPublication() {
-        return publication;
-    }
-
-    public void setPublication(Publication publication) {
-        this.publication = publication;
-    }
-
-    private Publication publication;
 
     public Reponse(Long id, String message, Date dateRep,  Medecin medecin ) {
         this.id = id;
@@ -32,14 +24,20 @@ public class Reponse {
         this.medecin = medecin;
     }
 
-    public Reponse(String message, Date dateRep,  Medecin medecin ,Publication publication) {
+    public Reponse(String message, Date dateRep, Publication publication, Medecin medecin ) {
         this.id = id;
         this.message = message;
         this.dateRep = dateRep;
-        this.medecin = medecin;
         this.publication=publication;
+        this.medecin = medecin;
     }
 
+    public Reponse(String message, Date dateRep,  Publication publication) {
+        this.id = id;
+        this.message = message;
+        this.dateRep = dateRep;
+        this.publication=publication;
+    }
     public Reponse(Long id) {
         this.id = id;
     }
@@ -81,6 +79,23 @@ public class Reponse {
     }
 
 
+    public Publication getPublication() {
+        return publication;
+    }
+
+    public void setPublication(Publication publication) {
+        this.publication = publication;
+    }
+
+    @Override
+    public String toString() {
+        return "Reponse{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", medecin='" + medecin + '\'' +
+                ", publication='" + publication + '\'' +
+                '}';
+    }
 
 
 }

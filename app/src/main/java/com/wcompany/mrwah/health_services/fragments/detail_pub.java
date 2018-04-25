@@ -30,9 +30,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.wcompany.mrwah.health_services.Entities.Abonne;
 import com.wcompany.mrwah.health_services.Entities.Medecin;
 import com.wcompany.mrwah.health_services.Entities.Publication;
 import com.wcompany.mrwah.health_services.Entities.Reponse;
+import com.wcompany.mrwah.health_services.Entities.Session;
 import com.wcompany.mrwah.health_services.R;
 import com.wcompany.mrwah.health_services.adapters.reponseAdapter;
 import com.wcompany.mrwah.health_services.controllers.main_app.conseil_medical.cons_med_state1;
@@ -57,12 +59,14 @@ public class detail_pub extends AppCompatActivity {
     RequestOptions option;
     ImageView image_r;
 
+    private Session session;
+    private Medecin med;
+
 
     RecyclerView recyclerView;
     private reponseAdapter adapter;
 
     Gson gson;
-
     RequestQueue requestQueue;
 
      Gson json = new Gson();
@@ -74,12 +78,13 @@ public class detail_pub extends AppCompatActivity {
         toolbar.setTitle("Détail Publication");
 
         requestQueue = Volley.newRequestQueue(this);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         //Publication pub = (Publication) getIntent().getSerializableExtra("Publication");
-        Publication pub;
+
         String pubJson=intent.getStringExtra("Publication");
 
-        pub = json.fromJson(pubJson, Publication.class);
+        final Publication pub ;
+        pub= json.fromJson(pubJson, Publication.class);
 
         tagGroup=findViewById(R.id.tag_group);
         tagGroup.setTags(pub.getZone().split(";", -1));
@@ -112,16 +117,29 @@ public class detail_pub extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+
+
+
+                //Retrieve informations from session
+                json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                session = new Session(getApplicationContext());
+                String acc = session.getAccount();
+                med = json.fromJson(acc, Medecin.class);
+
+
                 String message=edittext_reponse.getText().toString();
 
                 //Medecin med = json.fromJson(med, Medecin.class);
-                //long millis = System.currentTimeMillis();
-                //java.sql.Date date = new java.sql.Date(millis);
-                //Reponse rep = new Reponse(message,date,med,pub);
-                //gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                //sendMessage(gson.toJson(rep));
+                long millis = System.currentTimeMillis();
+                java.sql.Date date = new java.sql.Date(millis);
 
-                edittext_reponse.setText("");
+                Publication p= new Publication(pub.getId(), pub.getDescription(),pub.getZone(), pub.getDatePub(), pub.getPub_mode(), pub.isConsultation_domicile(), pub.getPosition_long(), pub.getPosition_lat(),pub.getReponses(),pub.getAbonne());
+
+                Reponse rep = new Reponse(message, date, p, med);
+                gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                sendMessage(gson.toJson(rep));
+
+                edittext_reponse.setText(gson.toJson(rep));
 
             }
         });
